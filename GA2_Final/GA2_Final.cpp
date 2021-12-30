@@ -46,7 +46,7 @@ bool check_user_input(string input) {
 }
 
 int main(int argc, char* argv[]) {
-    print_menu();
+ /*   print_menu();
 
     if (check_user_input(user_input())) {
         cout << "succes";
@@ -56,5 +56,5 @@ int main(int argc, char* argv[]) {
     }
 
 
-    return 0;
+    return 0;*/
 }

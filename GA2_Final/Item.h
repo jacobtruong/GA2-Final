@@ -17,7 +17,7 @@ private:
 public:
 	Item();
 	Item(string id, string title, int loan_type, int stock, float rental_fee, string status);
-	virtual ~Item() = 0;
+	virtual ~Item();
 
 	void setID(string id);
 	void setTitle(string title);

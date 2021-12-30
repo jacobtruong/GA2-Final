@@ -19,6 +19,10 @@ Item::Item(string id, string title, int loan_type, int stock, float rental_fee, 
 	//this->status = status;
 }
 
+Item::~Item() {
+
+}
+
 void Item::setID(string id) {
 	this->id = id;
 }
