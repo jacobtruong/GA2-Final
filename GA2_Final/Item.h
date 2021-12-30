@@ -7,7 +7,7 @@ class Item {
 private:
 	string id; // Note: Has special format
 	string title;
-	// string rental_type;
+	string rental_type;
 	int loan_type;
 	int stock;
 	float rental_fee;
@@ -15,6 +15,7 @@ private:
 public:
 	Item();
 	Item(string id, string title, int loan_type, int stock, float rental_fee, bool status);
+	virtual ~Item() = 0;
 
 	void setID(string id);
 	void setTitle(string title);
@@ -22,6 +23,7 @@ public:
 	void setStock(int stock);
 	void setRentalFee(float rental_fee);
 	void setStatus(bool status);
+	void setRentalType(string rental_type);
 
 	string getID();
 	string getTitle();
@@ -29,5 +31,6 @@ public:
 	int getStock();
 	float getRentalFee();
 	bool getStatus();
+	string getRentalType();
 };
 
