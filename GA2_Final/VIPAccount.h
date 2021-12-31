@@ -3,29 +3,17 @@
 #include "Item.h"
 
 #define MAXRENT 999
-class VIPAccount
+
+class VIPAccount : public Customer
 {
 private:
-	string id; // Note: Has special format
-	string name;
-	string address;
-	string phone;
 	int point;
-	Item* rentalList[MAXRENT];
-
+	Item* rental_list[MAXRENT];
 public:
 	VIPAccount();
-	VIPAccount(string id, string name, string address, string phone, int type);
+	VIPAccount(string id, string name, string address, string phone, string type);
 
-	void setID(string id);
-	void setName(string title);
-	void setAddress(string address);
-	void setPhone(string phone);
 	void setPoint(int point);
 
-	string getID();
-	string getName();
-	string getAddress();
-	string getPhone();
 	int getPoint();
 };

@@ -11,23 +11,27 @@ private:
 	string name;
 	string address;
 	string phone;
-	int type;
-	Item* rentalList[999];
+	string type;
+	int return_count;
+	Item* rental_list[999];
 
 public:
 	Customer();
-	Customer(string id, string name, string address, string phone, int type);
+	Customer(string id, string name, string address, string phone, string type);
 
 	void setID(string id);
-	void setName(string title);
+	void setName(string name);
 	void setAddress(string address);
 	void setPhone(string phone);
-	void setType(int type);
+	void setType(string type);
+	void setReturnCount(int return_count);
+	void setAll(string id, string name, string address, string phone, string type);
 
 	string getID();
 	string getName();
 	string getAddress();
 	string getPhone();
-	int getType();
+	string getType();
+	int getReturnCount();
 };
 
