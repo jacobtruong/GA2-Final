@@ -11,7 +11,7 @@ private:
 	string name;
 	string address;
 	string phone;
-	int type;
+	string type;
 	Item* rentalList[999];
 
 public:
@@ -28,6 +28,6 @@ public:
 	string getName();
 	string getAddress();
 	string getPhone();
-	int getType();
+	string getType();
 };
 
