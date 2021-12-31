@@ -11,6 +11,5 @@ private:
 
 public:
 	RegularAccount();
-	RegularAccount(string id, string name, string address, string phone, int type);
-
+	RegularAccount(string id, string name, string address, string phone, string type);
 };
