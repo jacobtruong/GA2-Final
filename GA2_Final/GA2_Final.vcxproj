@@ -139,17 +139,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Customer.cpp" />
     <ClCompile Include="DVD.cpp" />
     <ClCompile Include="GA2_Final.cpp" />
+    <ClCompile Include="GuestAccount.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="OldMovieRecord.cpp" />
+    <ClCompile Include="RegularAccount.cpp" />
     <ClCompile Include="VideoGame.cpp" />
+    <ClCompile Include="VIPAccount.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Customer.h" />
     <ClInclude Include="DVD.h" />
+    <ClInclude Include="GuestAccount.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="OldMovieRecord.h" />
+    <ClInclude Include="RegularAccount.h" />
     <ClInclude Include="VideoGame.h" />
+    <ClInclude Include="VIPAccount.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
