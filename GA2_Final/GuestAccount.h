@@ -7,7 +7,7 @@
 class GuestAccount : public Customer 
 {
 private:
-	Item* rentalList[MAXRENT];
+	Item* rental_list[MAXRENT];
 
 public:
 	GuestAccount();

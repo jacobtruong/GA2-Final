@@ -2,15 +2,20 @@
 
 Customer::Customer()
 {
-}
-
-Customer::Customer(string id, string name, string address, string phone, string type)
-{
 	this->id = "";
 	this->name = "";
 	this->address = "";
 	this->phone = "";
 	this->type = "";
+}
+
+Customer::Customer(string id, string name, string address, string phone, string type)
+{
+	this->id = id;
+	this->name = name;
+	this->address = address;
+	this->phone = phone;
+	this->type = type;
 }
 
 void Customer::setID(string id)
@@ -38,6 +43,20 @@ void Customer::setType(string type)
 	this->type = type;
 }
 
+void Customer::setReturnCount(int return_count)
+{
+	this->return_count = return_count;
+}
+
+void Customer::setAll(string id, string name, string address, string phone, string type)
+{
+	this->id = id;
+	this->name = name;
+	this->address = address;
+	this->phone = phone;
+	this->type = type;
+}
+
 string Customer::getID()
 {
 	return this->id;
@@ -61,4 +80,9 @@ string Customer::getPhone()
 string Customer::getType()
 {
 	return this->type;
+}
+
+int Customer::getReturnCount()
+{
+	return 0;
 }

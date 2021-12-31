@@ -7,7 +7,7 @@
 class RegularAccount : public Customer
 {
 private:
-	Item* rentalList[MAXRENT];
+	Item* rental_list[MAXRENT];
 
 public:
 	RegularAccount();
