@@ -20,3 +20,4 @@ void DVD::setGenre(string genre) {
 string DVD::getGenre() {
 	return genre;
 }
+

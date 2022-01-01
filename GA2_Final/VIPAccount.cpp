@@ -10,6 +10,10 @@ VIPAccount::VIPAccount(string id, string name, string address, string phone, str
 	setAll(id, name, address, phone, "VIP");
 }
 
+VIPAccount::~VIPAccount()
+{
+}
+
 void VIPAccount::setPoint(int point)
 {
 	this->point = point;

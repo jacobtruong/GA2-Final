@@ -18,6 +18,10 @@ Customer::Customer(string id, string name, string address, string phone, string 
 	this->type = type;
 }
 
+Customer::~Customer()
+{
+}
+
 void Customer::setID(string id)
 {
 	this->id = id;
@@ -85,4 +89,16 @@ string Customer::getType()
 int Customer::getReturnCount()
 {
 	return 0;
+}
+
+bool Customer::promotion() {
+
+}
+
+void Customer::add_account()
+{
+}
+
+void Customer::update_account()
+{
 }

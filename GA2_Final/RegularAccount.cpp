@@ -9,3 +9,7 @@ RegularAccount::RegularAccount(string id, string name, string address, string ph
 {
 	setAll(id, name, address, phone, "Regular");
 }
+
+RegularAccount::~RegularAccount()
+{
+}

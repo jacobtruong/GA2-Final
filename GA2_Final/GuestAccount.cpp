@@ -9,3 +9,7 @@ GuestAccount::GuestAccount(string id, string name, string address, string phone,
 {
 	setAll(id, name, address, phone, "Guest");
 }
+
+GuestAccount::~GuestAccount()
+{
+}

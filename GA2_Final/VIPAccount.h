@@ -12,6 +12,7 @@ private:
 public:
 	VIPAccount();
 	VIPAccount(string id, string name, string address, string phone, string type);
+	~VIPAccount();
 
 	void setPoint(int point);
 

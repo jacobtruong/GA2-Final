@@ -18,6 +18,7 @@ private:
 public:
 	Customer();
 	Customer(string id, string name, string address, string phone, string type);
+	virtual ~Customer();
 
 	void setID(string id);
 	void setName(string name);
@@ -33,5 +34,9 @@ public:
 	string getPhone();
 	string getType();
 	int getReturnCount();
+
+	bool promotion();
+	void add_account();
+	void update_account();
 };
 
