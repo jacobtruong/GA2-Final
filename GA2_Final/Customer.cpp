@@ -84,5 +84,5 @@ string Customer::getType()
 
 int Customer::getReturnCount()
 {
-	return 0;
+	return this->return_count;
 }
