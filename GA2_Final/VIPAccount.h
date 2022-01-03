@@ -7,14 +7,13 @@
 class VIPAccount : public Customer
 {
 private:
-	int point;
+	int point = 0;
 	Item* rental_list[MAXRENT];
 public:
 	VIPAccount();
-	VIPAccount(string id, string name, string address, string phone, string type);
+	VIPAccount(string id, string name, string address, string phone, string type, int point);
 	~VIPAccount();
-
 	void setPoint(int point);
-
 	int getPoint();
+	void VIP_award();
 };

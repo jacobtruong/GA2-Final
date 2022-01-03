@@ -13,6 +13,7 @@ private:
 	string phone;
 	string type;
 	int return_count;
+	int num_borrowed = 0;
 	Item* rental_list[999];
 
 public:
