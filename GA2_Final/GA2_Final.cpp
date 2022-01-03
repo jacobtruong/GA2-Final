@@ -23,6 +23,21 @@ void print_menu() {
         endl << "Exit." << endl;
 }
 
+void print_sub_menu_1() {
+    cout << "1. Add a new item, update or delete existing item" <<
+        endl << "   1.1 Add a new item" <<
+        endl << "   1.2 Update the existing item" <<
+        endl << "   1.3 Delete the existing item" <<
+        endl << "   1.4 Back to main menu." << endl;
+}
+
+void print_sub_menu_2() {
+    cout << "2. Add new customer or update an existing customer" <<
+        endl << "   2.1 Add new customer" <<
+        endl << "   2.2 Update an existing customer" <<
+        endl << "   2.3 Back to main menu." << endl;
+}
+
 string user_input() {
     string input;
     cout << "Choose the action you want to do: ";
@@ -44,6 +59,7 @@ bool check_user_input(string input) {
         return false;
     }
 }
+
 
 int main(int argc, char* argv[]) {
  /*   print_menu();

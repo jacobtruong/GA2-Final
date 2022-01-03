@@ -23,3 +23,7 @@ int VIPAccount::getPoint()
 {
 	return this->point;
 }
+
+void VIPAccount::VIP_award()
+{
+}
