@@ -91,7 +91,7 @@ int Customer::getReturnCount()
 	return this->return_count;
 }
 
-bool Customer::promotion() {
+void Customer::promotion() {
 
 }
 
@@ -100,5 +100,9 @@ void Customer::add_account()
 }
 
 void Customer::update_account()
+{
+}
+
+void Customer::print_info()
 {
 }

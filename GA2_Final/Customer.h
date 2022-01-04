@@ -36,8 +36,9 @@ public:
 	string getType();
 	int getReturnCount();
 
-	bool promotion();
+	void promotion();
 	void add_account();
 	void update_account();
+	void print_info();
 };
 
