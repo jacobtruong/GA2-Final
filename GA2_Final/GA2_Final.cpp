@@ -55,14 +55,21 @@ bool check_user_input_menu(string input) {
         cout << "The program exits.";
         return false;
     }
-    int num = stoi(input);
-    if (num > 0 && num <= 10) {
+    else
         return true;
+}
+
+bool check_user_input_int(const char* input) {
+    for (int i = 0; i < strlen(input); i++) {
+        if (input[i] >= '0' && input[i] <= '9') {
+            return true;
+        }
+        else {
+            return false;
+            break;
+        }
     }
-    else {
-        cout << "Not available. Please choose an action from the menu.";
-        return false;
-    }
+    
 }
 
 bool check_user_input_sub_menu_1(int input) {
@@ -198,70 +205,72 @@ int main(int argc, char* argv[]) {
     int user_choice_sub_2;
     while (1) {
         if (check_user_input_menu(user_input(user_choice))) {
-            user_choice_int = covert_input(user_choice);
-            switch (user_choice_int) {
-            case 1:
-                print_sub_menu_1();
-                if (check_user_input_sub_menu_1(user_input(user_choice_sub_1))) {
-                    switch (user_choice_sub_1) {
-                    case 1:
-                        //1.1 add new item function
-                        cout << "opt1.1" << endl;
-                        break;
-                    case 2:
-                        //1.2 Update the existing item function
-                        cout << "opt1.2" << endl;
-                        break;
-                    case 3:
-                        //1.3 Delete the existing item
-                        cout << "opt1.3" << endl;
-                        break;
-                    default:
-                        break;
+            if (check_user_input_int(user_choice.c_str())) {
+                user_choice_int = covert_input(user_choice);
+                switch (user_choice_int) {
+                case 1:
+                    print_sub_menu_1();
+                    if (check_user_input_sub_menu_1(user_input(user_choice_sub_1))) {
+                        switch (user_choice_sub_1) {
+                        case 1:
+                            //1.1 add new item function
+                            cout << "opt1.1" << endl;
+                            break;
+                        case 2:
+                            //1.2 Update the existing item function
+                            cout << "opt1.2" << endl;
+                            break;
+                        case 3:
+                            //1.3 Delete the existing item
+                            cout << "opt1.3" << endl;
+                            break;
+                        default:
+                            break;
+                        }
                     }
-                }
-                break;
-            case 2:
-                print_sub_menu_2();
-                if (check_user_input_sub_menu_2(user_input(user_choice_sub_2))) {
-                    switch (user_choice_sub_2) {
-                    case 1:
-                        //2.1 Add new customer
-                        cout << "opt2.1" << endl;
-                        break;
-                    case 2:
-                        //2.2 Update the existing item function
-                        cout << "opt2.2" << endl;
-                        break;
-                    default:
-                        break;
+                    break;
+                case 2:
+                    print_sub_menu_2();
+                    if (check_user_input_sub_menu_2(user_input(user_choice_sub_2))) {
+                        switch (user_choice_sub_2) {
+                        case 1:
+                            //2.1 Add new customer
+                            cout << "opt2.1" << endl;
+                            break;
+                        case 2:
+                            //2.2 Update the existing item function
+                            cout << "opt2.2" << endl;
+                            break;
+                        default:
+                            break;
+                        }
                     }
-                }
-                break;
-            case 3:
-                cout << "op3";
-                break;
-            case 4:
-                cout << "op4";
-                break;
-            case 5:
-                cout << "op5";
-                break;
-            case 6:
-                cout << "op6";
-                break;
-            case 7:
-                cout << "op7";
-                break;
-            case 8:
-                cout << "op8";
-                break;
-            case 9:
-                cout << "op9";
-                break;
-            case 10:
-                cout << "op10";
-                break;
+                    break;
+                case 3:
+                    cout << "op3";
+                    break;
+                case 4:
+                    cout << "op4";
+                    break;
+                case 5:
+                    cout << "op5";
+                    break;
+                case 6:
+                    cout << "op6";
+                    break;
+                case 7:
+                    cout << "op7";
+                    break;
+                case 8:
+                    cout << "op8";
+                    break;
+                case 9:
+                    cout << "op9";
+                    break;
+                case 10:
+                    cout << "op10";
+                    break;
+                }    
             }
             cout << "Back to main menu!" << endl;
             print_menu();
