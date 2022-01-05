@@ -91,6 +91,105 @@ int covert_input(string input) {
     return tmp;
 }
 
+bool check_id_customer(const char* id) {
+    bool invalid_id = false;
+    if (strlen(id) != 4) {
+        return invalid_id;
+    }
+    if (id[0] != 'C') {
+        return invalid_id;
+    }
+    for (int i = 1; i < 4; i++) {
+        if (id[i] < '0' || id[i] > '9') {
+            return invalid_id;
+            break;
+        }
+    }
+    return true;
+}
+
+bool check_id_item(const char* id) {
+    bool invalid_id = false;
+    if (strlen(id) != 9) {
+        return invalid_id;
+    }
+    if (id[0] != 'I') {
+        return invalid_id;
+    }
+    for (int i = 1; i < 4; i++) {
+        if (id[i] < '0' || id[i] > '9') {
+            return invalid_id;
+            break;
+        }
+    }
+    if (id[4] != '-')
+        return invalid_id;
+    for (int i = 5; i < 9; i++) {
+        if (id[i] < '0' || id[i] > '9') {
+            return invalid_id;
+            break;
+        }
+    }
+    return true;
+}
+
+bool check_phone(const char* phone) {
+    bool invalid_phone = false;
+    int num = strlen(phone);
+    if (num == 0)
+        return invalid_phone;
+    for (int i = 0; i < num; i++) {
+        if (phone[i] < '0' || phone[i] > '9') {
+            return invalid_phone;
+            break;
+        }
+    }
+    return true;
+}
+
+bool check_number_of_rentals(const char* num_rental) {
+    bool invalid_num_rental = false;
+    int num = strlen(num_rental);
+    if (num == 0)
+        return invalid_num_rental;
+    for (int i = 0; i < num; i++) {
+        if (num_rental[i] < '0' || num_rental[i] > '9') {
+            return invalid_num_rental;
+            break;
+        }
+    }
+    return true;
+}
+
+bool check_number_of_copies(const char* copies) {
+    bool invalid_num_copies = false;
+    int num = strlen(copies);
+    if (num == 0)
+        return invalid_num_copies;
+    for (int i = 0; i < num; i++) {
+        if (copies[i] < '0' || copies[i] > '9') {
+            return invalid_num_copies;
+            break;
+        }
+    }
+    return true;
+}
+
+bool check_rental_type(string rental_type) {
+    bool invalid_rental_type = false;
+    if (rental_type.compare("Record") == 0 || rental_type.compare("DVD") == 0 || rental_type.compare("Game") == 0)
+        return true;
+    else
+        return invalid_rental_type;
+}
+
+bool check_loan_type(string loan_type) {
+    bool invalid_loan_type = false;
+    if (loan_type.compare("2-day") == 0 || loan_type.compare("1-week") == 0)
+        return true;
+    else
+        return invalid_loan_type;
+}
 int main(int argc, char* argv[]) {
     print_menu();
     string user_choice;
@@ -114,7 +213,7 @@ int main(int argc, char* argv[]) {
                         cout << "opt1.2" << endl;
                         break;
                     case 3:
-                        //1.3 
+                        //1.3 Delete the existing item
                         cout << "opt1.3" << endl;
                         break;
                     default:
