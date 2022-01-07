@@ -6,7 +6,7 @@ private:
 	string genre;
 public:
 	OldMovieRecord();
-	OldMovieRecord(string id, string title, string genre, int loan_type, int stock, float rental_fee, string status);
+	OldMovieRecord(string id, string title, string genre, int loan_type, int stock, float rental_fee);
 	~OldMovieRecord();
 
 	void setGenre(string genre);

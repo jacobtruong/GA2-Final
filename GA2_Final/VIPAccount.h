@@ -7,6 +7,7 @@
 class VIPAccount : public Customer
 {
 private:
+	int num_borrowed;
 	int point = 0;
 	Item* rental_list[MAXRENT];
 public:
@@ -16,4 +17,7 @@ public:
 	void setPoint(int point);
 	int getPoint();
 	void VIP_award();
+
+	bool Borrowing(Item* item);
+	bool Returning(Item* item);
 };

@@ -13,7 +13,7 @@ private:
 	string phone;
 	string type;
 	int return_count;
-	int num_borrowed = 0;
+	int num_borrowed;
 	Item* rental_list[999];
 
 public:
@@ -36,6 +36,7 @@ public:
 	string getType();
 	int getReturnCount();
 
+	virtual bool borrowing(Item* item);
 	void promotion();
 	void add_account();
 	void update_account();

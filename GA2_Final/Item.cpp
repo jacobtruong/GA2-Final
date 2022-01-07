@@ -1,22 +1,21 @@
 #include "Item.h"
 
 Item::Item() {
-	//id = "";
-	//title = "";
-	//rental_type = "";
-	//loan_type = 0;
-	//stock = 0;
-	//rental_fee = 0;
-	//status = "";
+	this->id = "";
+	this->title = "";
+	this->loan_type = 1;
+	this->stock = 0;
+	this->rental_fee = rental_fee;
+	this->status = false;
 }
 
-Item::Item(string id, string title, int loan_type, int stock, float rental_fee, string status) {
-	//this->id = id;
-	//this->title = title;
-	//this->loan_type = loan_type;
-	//this->stock = stock;
-	//this->rental_fee = rental_fee;
-	//this->status = status;
+Item::Item(string id, string title, int loan_type, int stock, float rental_fee) {
+	this->id = id;
+	this->title = title;
+	this->loan_type = loan_type;
+	this->stock = stock;
+	this->rental_fee = rental_fee;
+	this->status = false;
 }
 
 Item::~Item() {
@@ -43,15 +42,12 @@ void Item::setRentalFee(float rental_fee) {
 	this->rental_fee = rental_fee;
 }
 
-void Item::setStatus(string status) {
-	this->status = status;
-}
 
 //void Item::setRentalType(string rental_type) {
 //	this->rental_type = rental_type;
 //}
 
-void Item::setAll(string id, string title, string rental_type, int loan_type, int stock, float rental_fee, string status) {
+void Item::setAll(string id, string title, string rental_type, int loan_type, int stock, float rental_fee) {
 	this->id = id;
 	this->title = title;
 	this->loan_type = loan_type;
@@ -81,10 +77,22 @@ float Item::getRentalFee() {
 	return this->rental_fee;
 }
 
-string Item::getStatus() {
-	return this->status;
-}
-
 string Item::getRentalType() {
 	return rental_type;
 }
+
+bool Item::borrowing()
+{
+	if ((!this->status) && (getStock() != 0)) {
+		this->status = true;
+	}
+	return this->status;
+}
+
+bool Item::returning()
+{
+	if (this->status)	this->status = false;
+	return !this->status;
+}
+
+
