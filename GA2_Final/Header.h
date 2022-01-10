@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//Print menu interface
 void print_menu() {
     cout << "Welcome to Genie's video store" <<
         endl << "Enter an option below." <<
@@ -21,6 +22,7 @@ void print_menu() {
         endl << "Exit." << endl;
 }
 
+// Print sub menu 1 interface
 void print_sub_menu_1() {
     cout << "1. Add a new item, update or delete existing item" <<
         endl << "   1. Add a new item" <<
@@ -29,6 +31,7 @@ void print_sub_menu_1() {
         endl << "   4. Back to main menu." << endl;
 }
 
+// Print sub menu 1.2 interface
 void print_sub_menu_1_2() {
     cout << "2. Update the existing item" <<
         endl << "   1. Update ID for a specific item" <<
@@ -39,6 +42,7 @@ void print_sub_menu_1_2() {
         endl << "   6. Back to main menu" << endl;
 }
 
+// Print sub menu 2 interface
 void print_sub_menu_2() {
     cout << "2. Add new customer or update an existing customer" <<
         endl << "   1. Add new customer" <<
@@ -46,6 +50,7 @@ void print_sub_menu_2() {
         endl << "   3. Back to main menu." << endl;
 }
 
+// Print sub menu 2.2 interface
 void print_sub_menu_2_2() {
     cout << "2. Update an existing customer" <<
         endl << "   1. Update ID for a customer" <<
@@ -55,6 +60,7 @@ void print_sub_menu_2_2() {
         endl << "   5. Back to main menu." << endl;
 }
 
+// Print sub menu 9 interface
 void print_sub_menu_9() {
     cout << "9. Display group of customers" <<
         endl << "   1. Display all Guest Accounts" <<
@@ -63,6 +69,7 @@ void print_sub_menu_9() {
         endl << "   4. Back to main menu" << endl;
 }
 
+// Print sub menu 10 interface
 void print_sub_menu_10() {
     cout << "10. Search items or customers" <<
         endl << "   1. Search items" <<
@@ -70,6 +77,7 @@ void print_sub_menu_10() {
         endl << "   3. Back to main menu" << endl;
 }
 
+// Print sub menu 10.1 interface
 void print_sub_menu_10_1() {
     cout << "10. Search items " <<
         endl << "   1. Search items by ID" <<
@@ -77,6 +85,7 @@ void print_sub_menu_10_1() {
         endl << "   3. Back to main menu" << endl;
 }
 
+// Print sub menu 10.2 interface
 void print_sub_menu_10_2() {
     cout << "10. Search customers " <<
         endl << "   1. Search customers by ID" <<
@@ -84,27 +93,33 @@ void print_sub_menu_10_2() {
         endl << "   3. Back to main menu" << endl;
 }
 
+// Take user's string input function
 string user_input(string& input) {
     cout << "Choose the action you want to do: ";
     cin >> input;
+    cout << '\n';
     return input;
 }
 
+// Take user's int input function
 int user_input(int& input) {
     cout << "Choose the action you want to do: ";
     cin >> input;
+    cout << '\n';
     return input;
 }
 
+// Checking the Exit string
 bool check_user_input_menu(string input) {
     if (input == "Exit") {
         cout << "The program exits.";
         return false;
     }
-    else
+    else 
         return true;
 }
 
+// Checking the valid int input
 bool check_user_input_int(const char* input) {
     for (int i = 0; i < strlen(input); i++) {
         if (input[i] >= '0' && input[i] <= '9') {
@@ -117,72 +132,80 @@ bool check_user_input_int(const char* input) {
     }
 }
 
+// Checking the value of input for sub menu 1
 bool check_user_input_sub_menu_1(int input) {
     if (input > 0 && input <= 4) {
         return true;
     }
     else {
-        cout << "Not available. Please choose an action from the menu.";
+        cout << "Not available. Please choose an action from the menu." << endl;
         return false;
     }
 }
 
+// Checking the value of input for sub menu 9
 bool check_user_input_sub_menu_9(int input) {
     if (input > 0 && input <= 4) {
         return true;
     }
     else {
-        cout << "Not available. Please choose an action from the menu.";
+        cout << "Not available. Please choose an action from the menu." << endl;
         return false;
     }
 }
 
+// Checking the value of input for sub menu 2
 bool check_user_input_sub_menu_2(int input) {
     if (input > 0 && input <= 3) {
         return true;
     }
     else {
-        cout << "Not available. Please choose an action from the menu.";
+        cout << "Not available. Please choose an action from the menu." << endl;
         return false;
     }
 }
 
+// Checking the value of input for sub menu 2.2
 bool check_user_input_sub_menu_2_2(int input) {
     if (input > 0 && input <= 5) {
         return true;
     }
     else {
-        cout << "Not available. Please choose an action from the menu.";
+        cout << "Not available. Please choose an action from the menu." << endl;
         return false;
     }
 }
 
+// Checking the value of input for sub menu 1.2
 bool check_user_input_sub_menu_1_2(int input) {
     if (input > 0 && input <= 6) {
         return true;
     }
     else {
-        cout << "Not available. Please choose an action from the menu.";
+        cout << "Not available. Please choose an action from the menu." << endl;
         return false;
     }
 }
 
+// Checking the value of input for sub menu 10
 bool check_user_input_sub_menu_10(int input) {
     if (input > 0 && input <= 3) {
         return true;
     }
     else {
-        cout << "Not available. Please choose an action from the menu.";
+        cout << "Not available. Please choose an action from the menu." << endl;
         return false;
     }
 }
 
+// Coverting input from string to int
 int covert_input(string input) {
     int tmp;
     tmp = stoi(input);
     return tmp;
 }
 
+// Validating the customer's ID
 bool check_id_customer(const char* id) {
     bool invalid_id = false;
     if (strlen(id) != 4) {
@@ -200,6 +223,7 @@ bool check_id_customer(const char* id) {
     return true;
 }
 
+// Validating the item's ID
 bool check_id_item(const char* id) {
     bool invalid_id = false;
     if (strlen(id) != 9) {
@@ -225,6 +249,7 @@ bool check_id_item(const char* id) {
     return true;
 }
 
+// Validating phone number
 bool check_phone(const char* phone) {
     bool invalid_phone = false;
     int num = strlen(phone);
@@ -239,6 +264,7 @@ bool check_phone(const char* phone) {
     return true;
 }
 
+// Validating number of rentals
 bool check_number_of_rentals(const char* num_rental) {
     bool invalid_num_rental = false;
     int num = strlen(num_rental);
@@ -253,6 +279,7 @@ bool check_number_of_rentals(const char* num_rental) {
     return true;
 }
 
+// Validating number of copies
 bool check_number_of_copies(const char* copies) {
     bool invalid_num_copies = false;
     int num = strlen(copies);
@@ -267,6 +294,7 @@ bool check_number_of_copies(const char* copies) {
     return true;
 }
 
+// Validating the rental type
 bool check_rental_type(string rental_type) {
     bool invalid_rental_type = false;
     if (rental_type.compare("Record") == 0 || rental_type.compare("DVD") == 0 || rental_type.compare("Game") == 0)
@@ -275,6 +303,7 @@ bool check_rental_type(string rental_type) {
         return invalid_rental_type;
 }
 
+// Validating the loan type
 bool check_loan_type(string loan_type) {
     bool invalid_loan_type = false;
     if (loan_type.compare("2-day") == 0 || loan_type.compare("1-week") == 0)

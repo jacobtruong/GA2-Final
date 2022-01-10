@@ -194,7 +194,9 @@ int main(int argc, char* argv[]) {
                     break;
                 }    
             }
+            cout << '\n';
             cout << "Back to main menu!" << endl;
+            cout << '\n';
             print_menu();
         }
         else {
