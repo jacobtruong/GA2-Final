@@ -28,17 +28,65 @@ void print_menu() {
 
 void print_sub_menu_1() {
     cout << "1. Add a new item, update or delete existing item" <<
-        endl << "   1 Add a new item" <<
-        endl << "   2 Update the existing item" <<
-        endl << "   3 Delete the existing item" <<
-        endl << "   4 Back to main menu." << endl;
+        endl << "   1. Add a new item" <<
+        endl << "   2. Update the existing item" <<
+        endl << "   3. Delete the existing item" <<
+        endl << "   4. Back to main menu." << endl;
+}
+
+void print_sub_menu_1_2() {
+    cout << "2. Update the existing item" <<
+        endl << "   1. Update ID for a specific item" <<
+        endl << "   2. Update title for a specific item" <<
+        endl << "   3. Update Loan Type for a specific item " <<
+        endl << "   4. Update Stock for a specific item" <<
+        endl << "   5. Update Rental Fee for a specific item" <<
+        endl << "   6. Back to main menu" << endl;
 }
 
 void print_sub_menu_2() {
     cout << "2. Add new customer or update an existing customer" <<
-        endl << "   1 Add new customer" <<
-        endl << "   2 Update an existing customer" <<
-        endl << "   3 Back to main menu." << endl;
+        endl << "   1. Add new customer" <<
+        endl << "   2. Update an existing customer" <<
+        endl << "   3. Back to main menu." << endl;
+}
+
+void print_sub_menu_2_2() {
+    cout << "2. Update an existing customer" <<
+        endl << "   1. Update ID for a customer" <<
+        endl << "   2. Update Name for a customer" <<
+        endl << "   3. Update Address for a customer" <<
+        endl << "   4. Update Phone number for a customer" <<
+        endl << "   5. Back to main menu." << endl;
+}
+
+void print_sub_menu_9() {
+    cout << "9. Display group of customers" <<
+        endl << "   1. Display all Guest Accounts" <<
+        endl << "   2. Display all Regular Accounts" <<
+        endl << "   3. Display all VIP Accounts" <<
+        endl << "   4. Back to main menu" << endl;
+}
+
+void print_sub_menu_10() {
+    cout << "10. Search items or customers" <<
+        endl << "   1. Search items" <<
+        endl << "   2. Search customers" <<
+        endl << "   3. Back to main menu" << endl;
+}
+
+void print_sub_menu_10_1() {
+    cout << "10. Search items " <<
+        endl << "   1. Search items by ID" <<
+        endl << "   2. Search items by Name" <<
+        endl << "   3. Back to main menu" << endl;
+}
+
+void print_sub_menu_10_2() {
+    cout << "10. Search customers " <<
+        endl << "   1. Search customers by ID" <<
+        endl << "   2. Search customers by Name" <<
+        endl << "   3. Back to main menu" << endl;
 }
 
 string user_input(string& input) {
