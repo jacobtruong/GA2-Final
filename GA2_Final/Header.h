@@ -206,9 +206,9 @@ int covert_input(string input) {
 }
 
 // Validating the customer's ID
-bool check_id_customer(const char* id) {
+bool check_id_customer(string id) {
     bool invalid_id = false;
-    if (strlen(id) != 4) {
+    if (strlen(id.c_str()) != 4) {
         return invalid_id;
     }
     if (id[0] != 'C') {
@@ -224,9 +224,9 @@ bool check_id_customer(const char* id) {
 }
 
 // Validating the item's ID
-bool check_id_item(const char* id) {
+bool check_id_item(string id) {
     bool invalid_id = false;
-    if (strlen(id) != 9) {
+    if (strlen(id.c_str()) != 9) {
         return invalid_id;
     }
     if (id[0] != 'I') {
@@ -250,9 +250,9 @@ bool check_id_item(const char* id) {
 }
 
 // Validating phone number
-bool check_phone(const char* phone) {
+bool check_phone(string phone) {
     bool invalid_phone = false;
-    int num = strlen(phone);
+    int num = strlen(phone.c_str());
     if (num == 0)
         return invalid_phone;
     for (int i = 0; i < num; i++) {
@@ -265,9 +265,9 @@ bool check_phone(const char* phone) {
 }
 
 // Validating number of rentals
-bool check_number_of_rentals(const char* num_rental) {
+bool check_number_of_rentals(string num_rental) {
     bool invalid_num_rental = false;
-    int num = strlen(num_rental);
+    int num = strlen(num_rental.c_str());
     if (num == 0)
         return invalid_num_rental;
     for (int i = 0; i < num; i++) {
@@ -280,9 +280,9 @@ bool check_number_of_rentals(const char* num_rental) {
 }
 
 // Validating number of copies
-bool check_number_of_copies(const char* copies) {
+bool check_number_of_copies(string copies) {
     bool invalid_num_copies = false;
-    int num = strlen(copies);
+    int num = strlen(copies.c_str());
     if (num == 0)
         return invalid_num_copies;
     for (int i = 0; i < num; i++) {
