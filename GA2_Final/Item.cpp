@@ -125,4 +125,10 @@ bool Item::returning()
 	return true;
 }
 
+void Item::writeToFile(string filename) {
+}
+
+void Item::display()
+{
+}
 

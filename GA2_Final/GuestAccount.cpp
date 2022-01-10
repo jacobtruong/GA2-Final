@@ -82,3 +82,9 @@ bool GuestAccount::returning(Item* item)
 	cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 	return false;
 }
+
+ostream& operator<<(ostream& out, const GuestAccount& csm)
+{
+	// TODO: insert return statement here
+	return out;
+}

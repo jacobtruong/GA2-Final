@@ -70,3 +70,9 @@ bool RegularAccount::returning(Item* item)
 	cout << "Regular Member " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 	return false;
 }
+
+ostream& operator<<(ostream& out, const RegularAccount& csm)
+{
+	// TODO: insert return statement here
+	return out;
+}

@@ -17,4 +17,7 @@ public:
 
 	bool borrowing(Item* item);
 	bool returning(Item* item);
+
+
+	friend ostream& operator<< (ostream& out, const GuestAccount& csm);
 };

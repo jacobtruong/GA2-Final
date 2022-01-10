@@ -90,3 +90,9 @@ bool VIPAccount::returning(Item* item)
 	cout << "Regular Member " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 	return false;
 }
+
+ostream& operator<<(ostream& out, const VIPAccount& csm)
+{
+	// TODO: insert return statement here
+	return out;
+}

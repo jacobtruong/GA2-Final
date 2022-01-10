@@ -25,3 +25,20 @@ void OldMovieRecord::setGenre(string genre) {
 string OldMovieRecord::getGenre() {
 	return genre;
 }
+
+void OldMovieRecord::writeToFile(string filename) {
+	ofstream file;
+	file.open(filename, ios::app);
+	file << *this;
+	file.close();
+}
+
+void OldMovieRecord::display() {
+	cout << *this;
+}
+
+ostream& operator<< (ostream& out, const OldMovieRecord& item) {
+	OldMovieRecord i = item;
+	out << i.getID() << "," << i.getTitle() << "," << i.getRentalType() << "," << i.getGenre() << "," << i.getLoanType() << "," << i.getStock() << "," << i.getRentalFee() << "," << i.getStatus() << endl;
+	return out;
+}

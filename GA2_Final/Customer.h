@@ -46,5 +46,7 @@ public:
 	void add_account();
 	void update_account();
 	void print_info();
+
+	friend ostream& operator<< (ostream& out, const Customer& csm);
 };
 

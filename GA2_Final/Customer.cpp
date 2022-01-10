@@ -115,6 +115,10 @@ vector<Item>& Customer::getBorrowedItems() {
 	return this->borrowed_items;
 }
 
+ostream& operator<< (ostream& out, const Customer& csm) {
+	return out;
+}
+
 void Customer::promotion() {
 	if (this->getType() == "Guest" && this->getReturnCount() >= 3) {
 		this->setType("Regular");

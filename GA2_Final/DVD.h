@@ -11,4 +11,9 @@ public:
 
 	void setGenre(string genre);
 	string getGenre();
+
+	void writeToFile(string filename);
+	void display();
+
+	friend ostream& operator<< (ostream& out, const DVD& item);
 };

@@ -27,3 +27,19 @@ string DVD::getGenre() {
 	return genre;
 }
 
+void DVD::writeToFile(string filename) {
+	ofstream file;
+	file.open(filename, ios::app);
+	file << *this;
+	file.close();
+}
+
+void DVD::display() {
+	cout << *this;
+}
+
+ostream& operator<< (ostream& out, const DVD& item) {
+	DVD i = item;
+	out << i.getID() << "," << i.getTitle() << "," << i.getRentalType() << "," << i.getGenre() << "," << i.getLoanType() << "," << i.getStock() << "," << i.getRentalFee() << "," << i.getStatus() << endl;
+	return out;
+}

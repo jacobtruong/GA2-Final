@@ -120,8 +120,8 @@ bool check_user_input_menu(string input) {
 }
 
 // Checking the valid int input
-bool check_user_input_int(const char* input) {
-    for (int i = 0; i < strlen(input); i++) {
+bool check_user_input_int(string input) {
+    for (int i = 0; i < input.size(); i++) {
         if (input[i] >= '0' && input[i] <= '9') {
             return true;
         }
