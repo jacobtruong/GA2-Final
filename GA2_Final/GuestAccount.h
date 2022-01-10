@@ -2,19 +2,19 @@
 #include "Customer.h"
 #include "Item.h"
 
-#define MAXRENTFORGUEST 2
+#define GUESTMAXRENT 2
 
 class GuestAccount : public Customer 
 {
 private:
-	int num_borrowed;
-	Item* rental_list[MAXRENTFORGUEST];
 
 public:
 	GuestAccount();
-	GuestAccount(string id, string name, string address, string phone, string type);
+	GuestAccount(string id, string name, string address, string phone);
+	GuestAccount(string id, string name, string address, string phone, int return_count);
+	GuestAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item> borrowed_items);
 	~GuestAccount();
 
-	bool Borrowing(Item* item);
-	bool Returning(Item* item);
+	bool borrowing(Item* item);
+	bool returning(Item* item);
 };

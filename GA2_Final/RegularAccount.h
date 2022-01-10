@@ -2,19 +2,17 @@
 #include "Customer.h"
 #include "Item.h"
 
-#define MAXRENT 999
-
 class RegularAccount : public Customer
 {
 private:
-	int num_borrowed;
-	Item* rental_list[MAXRENT];
 
 public:
 	RegularAccount();
-	RegularAccount(string id, string name, string address, string phone, string type);
+	RegularAccount(string id, string name, string address, string phone);
+	RegularAccount(string id, string name, string address, string phone, int return_count);
+	RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item> borrowed_items);
 	~RegularAccount();
 
-	bool Borrowing(Item* item);
-	bool Returning(Item* item);
+	bool borrowing(Item* item);
+	bool returning(Item* item);
 };

@@ -6,6 +6,12 @@ OldMovieRecord::OldMovieRecord() {
 OldMovieRecord::OldMovieRecord(string id, string title, string genre, int loan_type, int stock, float rental_fee) {
 	setAll(id, title, "Old Movie Record", loan_type, stock, rental_fee);
 	this->genre = genre;
+	if (stock > 0) {
+		this->setStatus(true);
+	}
+	else {
+		this->setStatus(false);
+	}
 }
 
 OldMovieRecord::~OldMovieRecord() {

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Item.h"
+#include <Vector>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ private:
 	string type;
 	int return_count;
 	int num_borrowed;
-	Item* rental_list[999];
+	vector<Item> borrowed_items;
 
 public:
 	Customer();
@@ -27,6 +28,8 @@ public:
 	void setPhone(string phone);
 	void setType(string type);
 	void setReturnCount(int return_count);
+	void setNumBorrowed(int num_borrowed);
+	void setBorrowedItems(vector<Item>& item);
 	void setAll(string id, string name, string address, string phone, string type);
 
 	string getID();
@@ -35,8 +38,10 @@ public:
 	string getPhone();
 	string getType();
 	int getReturnCount();
-
-	virtual bool borrowing(Item* item);
+	int getNumBorrowed();
+	vector<Item>& getBorrowedItems();
+	virtual bool borrowing(Item * item) = 0;
+	virtual bool returning(Item * item) = 0;
 	void promotion();
 	void add_account();
 	void update_account();

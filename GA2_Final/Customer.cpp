@@ -8,6 +8,8 @@ Customer::Customer()
 	this->address = "";
 	this->phone = "";
 	this->type = "";
+	this->return_count = 0;
+	this->num_borrowed = 0;
 }
 
 Customer::Customer(string id, string name, string address, string phone, string type)
@@ -17,6 +19,8 @@ Customer::Customer(string id, string name, string address, string phone, string 
 	this->address = address;
 	this->phone = phone;
 	this->type = type;
+	this->return_count = 0;
+	this->num_borrowed = 0;
 }
 
 Customer::~Customer()
@@ -53,6 +57,11 @@ void Customer::setReturnCount(int return_count)
 	this->return_count = return_count;
 }
 
+void Customer::setBorrowedItems(vector<Item>& item)
+{
+	this->borrowed_items = item;
+}
+
 void Customer::setAll(string id, string name, string address, string phone, string type)
 {
 	this->id = id;
@@ -60,6 +69,11 @@ void Customer::setAll(string id, string name, string address, string phone, stri
 	this->address = address;
 	this->phone = phone;
 	this->type = type;
+}
+
+void Customer::setNumBorrowed(int num_borrowed)
+{
+	this->num_borrowed = num_borrowed;
 }
 
 string Customer::getID()
@@ -92,24 +106,17 @@ int Customer::getReturnCount()
 	return this->return_count;
 }
 
-bool Customer::borrowing(Item* item)
+int Customer::getNumBorrowed()
 {
-	// perform the borrowing act using the book object
-	if (item->borrowing()) {
-		cout << "Member " << this->getID() << " borrowed book item: " << item->getTitle() << endl;
-		this->rental_list[num_borrowed++] = item;
-		item->setStock(item->getStock() - 1);
-		return true;
-	}
-
-	// if failed to borrow then the book is not available
-	cout << "The item id " << item->getID() << " is not available!" << endl;
-	return false;
+	return this->num_borrowed;
 }
 
+vector<Item>& Customer::getBorrowedItems() {
+	return this->borrowed_items;
+}
 
 void Customer::promotion() {
-	if (this->getType() == "Guest" && this->getReturnCount() == 3) {
+	if (this->getType() == "Guest" && this->getReturnCount() >= 3) {
 		this->setType("Regular");
 		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to Regular Account." << endl;
 		this->setReturnCount(0);
@@ -118,7 +125,7 @@ void Customer::promotion() {
 		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to Regular Account." << endl;
 	}
 
-	if (this->getType() == "Regular" && this->getReturnCount() == 3) {
+	if (this->getType() == "Regular" && this->getReturnCount() >= 3) {
 		this->setType("VIP");
 		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to VIP Account." << endl;
 		this->setReturnCount(0);

@@ -4,80 +4,81 @@
 GuestAccount::GuestAccount()
 {
 	setAll("", "", "", "", "Guest");
-	this->num_borrowed = 0;
-	for (int i = 0; i < MAXRENTFORGUEST; i++) {
-		this->rental_list[i] = NULL;
-	}
+	this->setReturnCount(0);
+	this->setNumBorrowed(0);
 }
 
-GuestAccount::GuestAccount(string id, string name, string address, string phone, string type)
+GuestAccount::GuestAccount(string id, string name, string address, string phone)
 {
 	setAll(id, name, address, phone, "Guest");
-	this->num_borrowed = 0;
-	setReturnCount(0);
-	for (int i = 0; i < MAXRENTFORGUEST; i++) {
-		this->rental_list[i] = NULL;
-	}
+	this->setReturnCount(0);
+	this->setNumBorrowed(0);
+}
+
+GuestAccount::GuestAccount(string id, string name, string address, string phone, int return_count) {
+	setAll(id, name, address, phone, "Guest");
+	setReturnCount(return_count);
+	this->setNumBorrowed(0);
+}
+
+GuestAccount::GuestAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item> borrowed_items) {
+	setAll(id, name, address, phone, "Guest");
+	setNumBorrowed(num_borrowed);
+	setReturnCount(return_count);
+	setBorrowedItems(borrowed_items);
 }
 
 GuestAccount::~GuestAccount()
 {
 }
 
-bool GuestAccount::Borrowing(Item* item)
+bool GuestAccount::borrowing(Item* item)
 {
-	// check if the member already borrowed 2 items
-	if (num_borrowed >= MAXRENTFORGUEST) {
-		cout << "Borrow failed be cause member " << this->getID() << " have borrowed " << MAXRENTFORGUEST << " items!" << endl;
-		return false;
-	}
-	// check if it is 2-day item
+	// Check if it is 2-day item
 	if (item->getLoanType() == 1) {
-		cout << "Member " << this->getID() << " cannot borrow item " << item->getTitle() << " because it's 2-day item!" << endl;
+		cerr << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " cannot borrow item " << item->getTitle() << " (" << item->getID() << ")" << " because it's 2-day item!" << endl;
 		return false;
 	}
-	// perform the borrowing act using the book object
-	if (item->borrowing()) {
-		cout << "Member " << this->getID() << " borrowed item: " << item->getTitle() << endl;
-		this->rental_list[num_borrowed++] = item;
-		item->setStock(item->getStock() - 1);
+
+	// Check if the member has already borrowed 2 items
+	if (this->getNumBorrowed() >= GUESTMAXRENT) {
+		cout << "Borrow failed because Guest Member " << this->getName() << " (" << this->getID() << ")" << " have reached borrow limit (" << GUESTMAXRENT << " items)!" << endl;
+		return false;
+	}
+	
+	// Check if item could be borrowed, if so return true
+	if (item->getStatus()) {
+		if (!(item->borrowing())) {
+			cout << "Unexpected error with borrowing process!\n";
+			return false;
+		}
+		cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+		this->getBorrowedItems().push_back(*item);
+		setNumBorrowed(getNumBorrowed() + 1);
 		return true;
 	}
-	// if failed to borrow then the book is not available
-	cout << "The item id " << item->getID() << " is not available!" << endl;
-	return false;
+	else { // if status is unavailable, print error and return false
+		cout << "Item " << item->getTitle() << " (" << item->getID() << ")" << " is not available!" << endl;
+		return false;
+	}
 }
 
-bool GuestAccount::Returning(Item* item)
+bool GuestAccount::returning(Item* item)
 {
-	bool found = false;
-	// check if the customer really borrow this book
-	for (int i = 0; i < MAXRENTFORGUEST; i++) {
-		// if an item exists in this borrowList
-		if (this->rental_list[i] != NULL) {
-			// check that item has the same id with the returning book item
-			if (item->getID().compare(this->rental_list[i]->getID()) == 0) {
-				found = true;
-				break;
+	// Check if the member has borrowed this item, return the item
+	for (int i = 0; i < this->getBorrowedItems().size(); i++) {
+		if (item->getID() == getBorrowedItems().at(i).getID()) {
+			if (!(item->returning())) {
+				cout << "Unexpected error with returning process!\n";
+				return false;
 			}
+			getBorrowedItems().erase(getBorrowedItems().begin() + i);
+			cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " has sucessfully returned item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+			setNumBorrowed(getNumBorrowed() - 1);
+			return true;
 		}
 	}
-
-	// no book item in the list match the book item, then failed to return the book
-	if (!found) {
-		cout << "Member " << this->getID() << " does not borrow item: " << item->getTitle() << endl;
-		return false;
-	}
-
-	// returning function
-	if (item->returning()) {
-		cout << "Member " << this->getID() << " returned item: " << item->getTitle() << endl;
-		this->rental_list[num_borrowed--] = NULL;
-		setReturnCount(this->getReturnCount() + 1);
-		return true;
-	}
-	cout << "The item id " << item->getID() << " is available so returning failed!" << endl;
+	// If item was not found to have been borrowed, print error and return false
+	cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 	return false;
 }
-
-

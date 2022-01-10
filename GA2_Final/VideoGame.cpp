@@ -5,6 +5,12 @@ VideoGame::VideoGame() {
 }
 VideoGame::VideoGame(string id, string title, int loan_type, int stock, float rental_fee) {
 	setAll(id, title, "Video Game", loan_type, stock, rental_fee);
+	if (stock > 0) {
+		this->setStatus(true);
+	}
+	else {
+		this->setStatus(false);
+	}
 }
 VideoGame::~VideoGame() {
 

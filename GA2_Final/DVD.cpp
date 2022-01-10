@@ -7,6 +7,12 @@ DVD::DVD() {
 DVD::DVD(string id, string title, string genre, int loan_type, int stock, float rental_fee) {
 	setAll(id, title, "DVD", loan_type, stock, rental_fee);
 	this->genre = genre;
+	if (stock > 0) {
+		this->setStatus(true);
+	}
+	else {
+		this->setStatus(false);
+	}
 }
 
 DVD::~DVD() {
