@@ -114,14 +114,13 @@ int main(int argc, char* argv[]) {
 			print_menu();
 		}
 		else {
+		// Prerequisite Team Information
+		cout << "ASSIGNMENT 2 GROUP 23" << endl
+			<< "s3878145, s3878145@rmit.edu.vn, Tri, Truong" << endl
+			<< "s3878496, s3878496@rmit.edu.vn, Dat, Pham" << endl;
 			exit(1);
 		}
 	}
-
-	// Prerequisite Team Information
-	cout << "ASSIGNMENT 2 GROUP 23" << endl
-		<< "s3878145, s3878145@rmit.edu.vn, Tri, Truong" << endl
-		<< "s3878496, s3878496@rmit.edu.vn, Dat, Pham" << endl;
 
 	return 0;
 }

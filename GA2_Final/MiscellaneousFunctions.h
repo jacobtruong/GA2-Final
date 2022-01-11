@@ -74,7 +74,7 @@ string user_input(string& input) {
 // Checking the Exit string
 bool check_user_input_menu(string input) {
 	if (input == "Exit") {
-		cout << "The program exits.";
+		//cout << "The program exits.";
 		return false;
 	}
 	else
