@@ -1,39 +1,7 @@
 #include "RelatedFunctions.h"
 
 int main(int argc, char* argv[]) {
-	//addItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-	//updateItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-	//deleteItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-
-
-
-	//addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-	//updateCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-
-
-
-	//borrowFunc("E:\\Users\\Raven\\Documents\\Test\\Items.txt", "E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-	//returnFunc("E:\\Users\\Raven\\Documents\\Test\\Items.txt", "E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-
-
-
-	//promoteCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-
-
-
-	//displayAllItems("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-	//displayAllCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-
-
-
-	//displayCustomersByType("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-	//displayItemsWithNoStocks("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-
-
-
-	//searchAndDisplayItems("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-	//searchAndDisplayCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-
+	// Driver code - below is the menu navigation
 	print_menu();
 	string user_choice;
 	int user_choice_int;
@@ -150,6 +118,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+	// Prerequisite Team Information
 	cout << "ASSIGNMENT 2 GROUP 23" << endl
 		<< "s3878145, s3878145@rmit.edu.vn, Tri, Truong" << endl
 		<< "s3878496, s3878496@rmit.edu.vn, Dat, Pham" << endl;
