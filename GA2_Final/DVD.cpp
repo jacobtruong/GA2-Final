@@ -1,5 +1,6 @@
 #include "DVD.h"
 
+// DVD's Contructor implementation
 DVD::DVD() {
 	setAll("", "", "DVD", 0, 0, 0);
 }
@@ -15,18 +16,21 @@ DVD::DVD(string id, string title, string genre, int loan_type, int stock, float 
 	}
 }
 
+// DVD's Detructor implementation 
 DVD::~DVD() {
-
 }
 
+// set function
 void DVD::setGenre(string genre) {
 	this->genre = genre;
 }
 
+// get function
 string DVD::getGenre() {
 	return genre;
 }
 
+// write to file function
 void DVD::writeToFile(string filename) {
 	ofstream file;
 	file.open(filename, ios::app);
@@ -34,6 +38,7 @@ void DVD::writeToFile(string filename) {
 	file.close();
 }
 
+// Display DVD item on the console
 void DVD::display() {
 	cout << "Item: " << endl;
 	cout << "- ID: " << getID() <<
@@ -65,6 +70,7 @@ string DVD::toStr()
 	return ss.str();
 }
 
+// Operator Declaration
 ostream& operator<< (ostream& out, const DVD& item) {
 	DVD i = item;
 	out << i.getID() << "," << i.getTitle() << "," << i.getRentalType() << "," << i.getGenre() << "," << i.getLoanType() << "," << i.getStock() << "," << i.getRentalFee() << "," << i.getStatus() << endl;

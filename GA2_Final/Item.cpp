@@ -1,5 +1,6 @@
 #include "Item.h"
 
+// Operator declaration 
 ostream& operator<< (ostream& out, Item& e) {
 	out << "- ID: " << e.getID() <<
 		endl << "- Type: " << e.getTitle() <<
@@ -10,6 +11,7 @@ ostream& operator<< (ostream& out, Item& e) {
 	return out;
 }
 
+// Item's contructor implementation
 Item::Item() {
 	this->id = "";
 	this->title = "";
@@ -33,10 +35,12 @@ Item::Item(string id, string title, int loan_type, int stock, float rental_fee) 
 	}
 }
 
+// Item's detructor implementation
 Item::~Item() {
 
 }
 
+// Set functions
 void Item::setID(string id) {
 	this->id = id;
 }
@@ -77,6 +81,7 @@ void Item::setAll(string id, string title, string rental_type, int loan_type, in
 	
 }
 
+// Get functions
 string Item::getID() {
 	return this->id;
 }
@@ -106,6 +111,7 @@ bool Item::getStatus()
 	return this->status;
 }
 
+// Borrowing functions for item
 bool Item::borrowing()
 {
 	// If item is borrowable and stock > 0, decrease stock by 1
@@ -122,6 +128,7 @@ bool Item::borrowing()
 	}
 }
 
+// Returning functions for item
 bool Item::returning()
 {
 	// If item was previously unavailable and stock == 0, set status to available
@@ -138,6 +145,7 @@ bool Item::returning()
 void Item::writeToFile(string filename) {
 }
 
+// Display on the console function
 void Item::display()
 {
 	cout << "Item: " << endl;

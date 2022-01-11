@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
                     break;
                 case 3:
                     // Promoting an existing customer
-                    cout << "op3";
+                    promoteCustomer("Customer.txt");
                     break;
                 case 4:
                     //Rent an item

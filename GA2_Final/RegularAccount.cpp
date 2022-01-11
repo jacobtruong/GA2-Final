@@ -1,6 +1,7 @@
 #include "RegularAccount.h"
 #include "Item.h"
 
+// Regular Account's contructor implementation
 RegularAccount::RegularAccount()
 {
 	setAll("", "", "", "", "Regular");
@@ -28,10 +29,12 @@ RegularAccount::RegularAccount(string id, string name, string address, string ph
 	setBorrowedItems(borrowed_items);
 }
 
+// Regular Account's detructor implementation
 RegularAccount::~RegularAccount()
 {
 }
 
+// Borrowing function for Regular Account
 bool RegularAccount::borrowing(Item* item)
 {
 	// Check if item could be borrowed, if so return true
@@ -51,6 +54,7 @@ bool RegularAccount::borrowing(Item* item)
 	}
 }
 
+// Returning function for Regular Account
 bool RegularAccount::returning(Item* item)
 {
 	// Check if the Customer has borrowed this item, return the item
@@ -72,6 +76,7 @@ bool RegularAccount::returning(Item* item)
 	return false;
 }
 
+// Write to file functions
 void RegularAccount::writeToFile(string filename) {
 	ofstream file;
 	file.open(filename, ios::app);
@@ -79,6 +84,7 @@ void RegularAccount::writeToFile(string filename) {
 	file.close();
 }
 
+// Operator's declaration 
 ostream& operator<<(ostream& out, const RegularAccount& csm)
 {
 	RegularAccount a = csm;

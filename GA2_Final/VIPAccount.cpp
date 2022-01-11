@@ -1,5 +1,6 @@
 #include "VIPAccount.h"
 
+// VIP's contructor Implementation
 VIPAccount::VIPAccount()
 {
 	setAll("", "", "", "", "VIP");
@@ -31,15 +32,18 @@ VIPAccount::VIPAccount(string id, string name, string address, string phone, int
 	this->point = point;
 }
 
+// VIP's detructor Implementation
 VIPAccount::~VIPAccount()
 {
 }
 
+// Set function for point
 void VIPAccount::setPoint(int point)
 {
 	this->point = point;
 }
 
+// Get function for point
 int VIPAccount::getPoint()
 {
 	return this->point;
@@ -49,6 +53,7 @@ void VIPAccount::redeem()
 {
 }
 
+// Borrowing function for VIP Account
 bool VIPAccount::borrowing(Item* item)
 {
 	// Check if item could be borrowed, if so return true
@@ -68,6 +73,7 @@ bool VIPAccount::borrowing(Item* item)
 	}
 }
 
+// Returning function for VIP Account
 bool VIPAccount::returning(Item* item)
 {
 	// Check if the Customer has borrowed this item, return the item
@@ -92,6 +98,7 @@ bool VIPAccount::returning(Item* item)
 	return false;
 }
 
+// Write to file functions
 void VIPAccount::writeToFile(string filename) {
 	ofstream file;
 	file.open(filename, ios::app);
@@ -99,6 +106,7 @@ void VIPAccount::writeToFile(string filename) {
 	file.close();
 }
 
+// Display Account on the console fucntions
 void VIPAccount::display() {
 	cout << "Customer: " << endl;
 	cout << "- ID: " << getID() <<
