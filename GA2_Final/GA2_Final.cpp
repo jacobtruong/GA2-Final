@@ -1,76 +1,126 @@
-#include <iostream>
-#include "Item.h"
-#include "OldMovieRecord.h"
-#include "DVD.h"
-#include "VideoGame.h"
-#include <string>
-
-using namespace std;
-
-void print_menu() {
-    cout << "Welcome to Genie's video store" <<
-        endl << "Enter an option below." <<
-        endl << "1. Add a new item, update or delete existing item" <<
-        endl << "2. Add new customer or update an existing customer" <<
-        endl << "3. Promote an existing customer" <<
-        endl << "4. Rent an item" <<
-        endl << "5. Return an item" <<
-        endl << "6. Display all items" <<
-        endl << "7. Display out-of-stock items" <<
-        endl << "8. Display all customers" <<
-        endl << "9. Display group of customers" <<
-        endl << "10. Search items or customers" <<
-        endl << "Exit." << endl;
-}
-
-void print_sub_menu_1() {
-    cout << "1. Add a new item, update or delete existing item" <<
-        endl << "   1.1 Add a new item" <<
-        endl << "   1.2 Update the existing item" <<
-        endl << "   1.3 Delete the existing item" <<
-        endl << "   1.4 Back to main menu." << endl;
-}
-
-void print_sub_menu_2() {
-    cout << "2. Add new customer or update an existing customer" <<
-        endl << "   2.1 Add new customer" <<
-        endl << "   2.2 Update an existing customer" <<
-        endl << "   2.3 Back to main menu." << endl;
-}
-
-string user_input() {
-    string input;
-    cout << "Choose the action you want to do: ";
-    cin >> input;
-    return input;
-}
-
-bool check_user_input(string input) {
-    if (input == "Exit") {
-        cout << "The program exits.";
-        return false;
-    }
-    int num = stoi(input);
-    if (num > 0 && num <= 10) {
-        return true;
-    }
-    else {
-        cout << "Not available. Please choose an action from the menu.";
-        return false;
-    }
-}
-
+#include "CoreFunctions.h"
 
 int main(int argc, char* argv[]) {
- /*   print_menu();
+	// Driver code - below is the menu navigation
+	print_menu();
+	string user_choice;
+	int user_choice_int;
+	while (1) {
+		if (check_user_input_menu(user_input(user_choice))) {
+			if (check_user_input_int(user_choice.c_str())) {
+				user_choice_int = stoi((user_choice));
+				switch (user_choice_int) {
+				case 1:
+					print_sub_menu_1();
+					if (check_user_input_sub_menu_1(user_choice_int = stoi(user_input(user_choice)))) {
+						switch (user_choice_int) {
+						case 1:
+							//1.1 add new item function
+							addItem("Items.txt");
+							break;
+						case 2:
+							//1.2 Update the existing item function
+							print_sub_menu_1_2();
+							if (check_user_input_sub_menu_1_2(user_choice_int = stoi(user_input(user_choice)))) {
+								switch (user_choice_int) {
+								case 1:
+									updateItem("Items.txt");
+										break;
+								case 2:
+									addStock("Items.txt");
+										break;
+								default:
+									break;
+								}
+							}
+							break;
+						case 3:
+							//1.3 Delete the existing item
+							deleteItem("Items.txt");
+							break;
+						default:
+							break;
+						}
+					}
+					break;
+				case 2:
+					print_sub_menu_2();
+					if (check_user_input_sub_menu_2(user_choice_int = stoi(user_input(user_choice)))) {
+						switch (user_choice_int) {
+						case 1:
+							//2.1 Add new customer
+							addCustomer("Customers.txt");
+							break;
+						case 2:
+							//2.2 Update the existing customers function
+							updateCustomer("Customers.txt");
+							break;
+						default:
+							break;
+						}
+					}
+					break;
+				case 3:
+					// Promoting an existing customer
+					promoteCustomer("Customers.txt");
+					break;
+				case 4:
+					//Rent an item
+					borrowFunc("Items.txt", "Customers.txt");
+					break;
+				case 5:
+					//Return an item
+					returnFunc("Items.txt", "Customers.txt");
+					break;
+				case 6:
+					//Display all items
+					displayAllItems("Items.txt");
+					break;
+				case 7:
+					//Display out-of-stock items
+					displayItemsWithNoStocks("Items.txt");
+					break;
+				case 8:
+					//Display all customers
+					displayAllCustomers("Customers.txt");
+					break;
+				case 9:
+					//Display a group of customers
+					displayCustomersByType("Customers.txt");
+					break;
+				case 10:
+					//Search items
+					print_sub_menu_10();
+					if (check_user_input_sub_menu_10(user_choice_int = stoi(user_input(user_choice)))) {
+						switch (user_choice_int) {
+						case 1:
+							//10.1 search items
+							searchAndDisplayItems("Items.txt");
+							break;
+						case 2:
+							//10.2 search customers
+							searchAndDisplayCustomers("Customers.txt");
+							break;
+						default:
+							break;
+						}
+					}
+					break;
+				}
+			}
+			cout << '\n';
+			cout << "Back to main menu!" << endl;
+			cout << '\n';
+			print_menu();
+		}
+		else {
+		// Prerequisite Team Information
+		cout << "ASSIGNMENT 2 GROUP 23" << endl
+			<< "s3878145, s3878145@rmit.edu.vn, Tri, Truong" << endl
+			<< "s3878496, s3878496@rmit.edu.vn, Dat, Pham" << endl;
+			exit(1);
+		}
+	}
 
-    if (check_user_input(user_input())) {
-        cout << "succes";
-    }
-    else {
-        cout << "fail";
-    }
-
-
-    return 0;*/
+	return 0;
 }

@@ -1,5 +1,6 @@
 #include "Customer.h"
-
+#include "Item.h"
+// Customer's contructor implementation
 Customer::Customer()
 {
 	this->id = "";
@@ -7,6 +8,8 @@ Customer::Customer()
 	this->address = "";
 	this->phone = "";
 	this->type = "";
+	this->return_count = 0;
+	this->num_borrowed = 0;
 }
 
 Customer::Customer(string id, string name, string address, string phone, string type)
@@ -16,12 +19,16 @@ Customer::Customer(string id, string name, string address, string phone, string 
 	this->address = address;
 	this->phone = phone;
 	this->type = type;
+	this->return_count = 0;
+	this->num_borrowed = 0;
 }
 
+// Customer's detructor implementation
 Customer::~Customer()
 {
 }
 
+// Customer's set functions
 void Customer::setID(string id)
 {
 	this->id = id;
@@ -52,6 +59,11 @@ void Customer::setReturnCount(int return_count)
 	this->return_count = return_count;
 }
 
+void Customer::setBorrowedItems(vector<string>& item)
+{
+	this->borrowed_items = item;
+}
+
 void Customer::setAll(string id, string name, string address, string phone, string type)
 {
 	this->id = id;
@@ -61,6 +73,12 @@ void Customer::setAll(string id, string name, string address, string phone, stri
 	this->type = type;
 }
 
+void Customer::setNumBorrowed(int num_borrowed)
+{
+	this->num_borrowed = num_borrowed;
+}
+
+// Customer' get functions
 string Customer::getID()
 {
 	return this->id;
@@ -91,14 +109,36 @@ int Customer::getReturnCount()
 	return this->return_count;
 }
 
-bool Customer::promotion() {
-
-}
-
-void Customer::add_account()
+int Customer::getNumBorrowed()
 {
+	return this->num_borrowed;
 }
 
-void Customer::update_account()
-{
+vector<string>& Customer::getBorrowedItems() {
+	return this->borrowed_items;
 }
+
+// Write to file function
+void Customer::writeToFile(string filename) {
+}
+
+// Display on the console function.
+void Customer::display() {
+	cout << "Customer: " << endl;
+	cout << "- ID: " << getID() <<
+		endl << "- Name: " << getName() <<
+		endl << "- Address: " << getAddress() <<
+		endl << "- Phone Number: " << getPhone() <<
+		endl << "- Account Type: " << getType() <<
+		endl << "- Return Count: " << getReturnCount() <<
+		endl << "- Number of Items Borrowed: " << getNumBorrowed() <<
+		endl << "- Borrowed Items: " << endl;
+	for (int i = 0; i < this->getNumBorrowed(); i++) {
+		cout << "\t+ " << this->getBorrowedItems().at(i) << endl;
+	}
+
+	cout << "\n";
+}
+
+
+

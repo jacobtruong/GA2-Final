@@ -68,5 +68,11 @@
     <ClInclude Include="VIPAccount.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MiscellaneousFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
