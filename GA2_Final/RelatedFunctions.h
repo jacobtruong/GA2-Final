@@ -767,6 +767,7 @@ bool returnFunc(string items_file, string customers_file) {
 
 // The ability to promote a customer (from Guest to Regular or from Regular to VIP).
 bool promoteCustomer(string filename) {
+    // Fetch all current customers from file
     vector<Customer*> customers = fetchCustomers(filename);
     
     string input;
@@ -775,6 +776,7 @@ bool promoteCustomer(string filename) {
     cout << "Input the customer you want to promote!\n";
     input = inputCustomerID();
 
+    // If customer is not found in the list, return false and stop the function
     if (search(input, customers) != -1) {
         updating_customer_index = search(input, customers);
     }
@@ -785,16 +787,19 @@ bool promoteCustomer(string filename) {
 
     Customer* csm = customers.at(updating_customer_index);
 
+    // If account type is VIP => Error
     if (csm->getType() == "VIP") {
         cout << "VIP Customer cannot be promoted!\n";
         return false;
     }
 
+    // If return count < 3 => Error
     if (csm->getReturnCount() < 3) {
         cout << csm->getType() << " Customer " << csm->getName() << " (" << csm->getID() << ")" << " has not returned sufficient number of items (Current return count: " << csm->getReturnCount() << ")\n";
         return false;
     }
 
+    // Promoting the account
     if (csm->getType() == "Guest") {
         RegularAccount* ra = new RegularAccount(csm->getID(), csm->getName(), csm->getAddress(), csm->getPhone(), csm->getNumBorrowed(), 0, csm->getBorrowedItems());
         customers.at(updating_customer_index) = ra;
@@ -806,53 +811,61 @@ bool promoteCustomer(string filename) {
         cout << "Regular Customer " << csm->getName() << " (" << csm->getID() << ")" << " has been promoted to VIP Customer!\n";
     }
 
+    // Call function to update the file with updated list
     updateFile(filename, customers);
+
     return true;
 }
 
 
-// SORTS
+// Below are custom bubble sort algorithms to sort the vector array without using std::sort. Bubble sort algorithm was used
+
+// Function that sorts the Item vector list by Name (ascending) - Overloaded function
 void sortByName(vector<Item* >* items) {
     int size = items->size();
-
     for (int i = 0; i < size - 1; i++)
         for (int j = 0; j < size - i - 1; j++)
             if (items->at(j)->getTitle().compare(items->at(j + 1)->getTitle()) > 0)
                 swap(items->at(j), items->at(j + 1));
 }
 
+// Function that sorts the Item vector list by ID (ascending) - Overloaded function
 void sortByID(vector<Item* >* items) {
     int size = items->size();
-
     for (int i = 0; i < size - 1; i++)
         for (int j = 0; j < size - i - 1; j++)
             if (items->at(j)->getID().compare(items->at(j + 1)->getID()) > 0)
                 swap(items->at(j), items->at(j + 1));
 }
 
+// Function that sorts the Customer vector list by Name (ascending) - Overloaded function
 void sortByName(vector<Customer * >* customers) {
     int size = customers->size();
-
     for (int i = 0; i < size - 1; i++)
         for (int j = 0; j < size - i - 1; j++)
             if (customers->at(j)->getName().compare(customers->at(j + 1)->getName()) > 0)
                 swap(customers->at(j), customers->at(j + 1));
 }
 
+// Function that sorts the Customer vector list by ID (ascending) - Overloaded function
 void sortByID(vector<Customer * >* customers) {
     int size = customers->size();
-
     for (int i = 0; i < size - 1; i++)
         for (int j = 0; j < size - i - 1; j++)
             if (customers->at(j)->getID().compare(customers->at(j + 1)->getID()) > 0)
                 swap(customers->at(j), customers->at(j + 1));
 }
 
-//• The ability to display all items, sorted by titles or IDs.
+// "The ability to display all items, sorted by titles or IDs."
+
+// Function that displays all items
 bool displayAllItems(string filename) {
+    // Fetch all current items from file
     vector<Item*> items = fetchItems(filename);
+
     string input;
 
+    // Ask the user for their sorting preference and sort accordingly
     cout << "Would you like to sort the items by: \n";
     cout << "1. Name/Title\n";
     cout << "2. ID\n";
@@ -870,6 +883,7 @@ bool displayAllItems(string filename) {
         sortByID(&items);
     }
 
+    // Display the sorted items
     for (Item* item : items) {
         item->display();
     }
@@ -877,11 +891,16 @@ bool displayAllItems(string filename) {
     return true;
 }
 
-//• The ability to display all customer, sorted by names or IDs.
+// "The ability to display all customer, sorted by names or IDs."
+
+// Function that displays all customers
 bool displayAllCustomers(string filename) {
+    // Fetch all current customers from file
     vector<Customer *> customers = fetchCustomers(filename);
+
     string input;
 
+    // Ask the user for their sorting preference and sort accordingly
     cout << "Would you like to sort the customers by: \n";
     cout << "1. Name\n";
     cout << "2. ID\n";
@@ -898,6 +917,7 @@ bool displayAllCustomers(string filename) {
         sortByID(&customers);
     }
 
+    // Display the sorted customers
     for (Customer * customer : customers) {
         customer->display();
     }
@@ -905,12 +925,15 @@ bool displayAllCustomers(string filename) {
     return true;
 }
  
-//• The ability to display a group of customers according to their level (e.g. Guest, Regular, or VIP).
+// "The ability to display a group of customers according to their level (e.g. Guest, Regular, or VIP)"
 bool displayCustomersByType(string filename) {
+    // Fetch all current customers from file
     vector<Customer*> customers = fetchCustomers(filename);
+
     string input;
 
-    cout << "Select your type customers level: \n";
+    // Ask for user to choose the account level
+    cout << "Select the customers' level: \n";
     cout << "1. Guest Customers\n";
     cout << "2. Regular Customers\n";
     cout << "3. VIP Customers\n";
@@ -922,6 +945,7 @@ bool displayCustomersByType(string filename) {
 
     int choice = stoi(input);
 
+    // From the choice, create a "check" string
     string check;
     if (choice == 1) {
         check = "Guest";
@@ -935,6 +959,7 @@ bool displayCustomersByType(string filename) {
 
     cout << endl;
 
+    // Display customers accounts whose type == check
     for (Customer* csm : customers) {
         if (csm->getType() == check) {
             csm->display();
@@ -944,13 +969,15 @@ bool displayCustomersByType(string filename) {
     return true;
 }
 
-//• The ability to display all items that have no copies in stock.
+// "The ability to display all items that have no copies in stock."
+// Function that displays items with no stocks
 bool displayItemsWithNoStocks(string filename) {
     // Fetch all current items from file
     vector<Item*> items = fetchItems(filename);
 
     cout << "Below are items with no stocks:\n";
 
+    // If item's stock == 0, print
     for (Item* item : items) {
         if (item->getStock() == 0) {
             item->display();
@@ -960,14 +987,17 @@ bool displayItemsWithNoStocks(string filename) {
     return true;
 }
 
-//• The ability to search for an item that matches a specified title or ID.
-//   o Searches that match titles should display the information about that item, including title, genre, rental type, and the number of copies available.
+// "The ability to search for an item that matches a specified title or ID."
+//      "Searches that match titles should display the information about that item, including title, genre, rental type, and the number of copies available."
+
+// Function that allows users to search for specific items
 bool searchAndDisplayItems(string filename) {
     // Fetch all current items from file
     vector<Item*> items = fetchItems(filename);
     string input;
     bool has_required_item = false;
 
+    // Ask user to choose what to search with
     cout << "Would you like to search for Items by: \n";
     cout << "1. Name/Title\n";
     cout << "2. ID\n";
@@ -981,6 +1011,7 @@ bool searchAndDisplayItems(string filename) {
     cout << "Please input your search query: ";
     getline(cin, input);
 
+    // If user chooses to search by Name, check the item's title with input
     if (choice == 1) {
         for (Item * item : items) {
             if (item->getTitle() == input) {
@@ -989,6 +1020,7 @@ bool searchAndDisplayItems(string filename) {
             }
         }
     }
+    // If user chooses to search by ID, check the item's ID with input
     else if (choice == 2) {
         for (Item* item : items) {
             if (item->getID() == input) {
@@ -998,6 +1030,7 @@ bool searchAndDisplayItems(string filename) {
         }
     }
 
+    // If no items found, return error;
     if (!has_required_item) {
         cout << "\nNo items found with the inputted query!\n";
     }
@@ -1005,14 +1038,18 @@ bool searchAndDisplayItems(string filename) {
     return has_required_item;
 }
 
-//• The ability to search for a customer that matches a specified name or ID.
-//    o Searches that match a customer should display the information about that customer including customer name and customer ID, phone, address
+// "The ability to search for a customer that matches a specified name or ID."
+//      "Searches that match a customer should display the information about that customer including customer name and customer ID, phone, address"
+
+// Function that allows users to search for specific customers
 bool searchAndDisplayCustomers(string filename) {
     // Fetch all current customers from file
     vector<Customer *> customers = fetchCustomers(filename);
+
     string input;
     bool has_required_item = false;
 
+    // Ask user to choose what to search with
     cout << "Would you like to search for Customers by: \n";
     cout << "1. Name\n";
     cout << "2. ID\n";
@@ -1026,6 +1063,7 @@ bool searchAndDisplayCustomers(string filename) {
     cout << "Please input your search query: ";
     getline(cin, input);
 
+    // If user chooses to search by Name, check the customer's name with input
     if (choice == 1) {
         for (Customer * customer : customers) {
             if (customer->getName() == input) {
@@ -1034,6 +1072,7 @@ bool searchAndDisplayCustomers(string filename) {
             }
         }
     }
+    // If user chooses to search by ID, check the customer's ID with input
     else if (choice == 2) {
         for (Customer * customer : customers) {
             if (customer->getID() == input) {
@@ -1047,5 +1086,6 @@ bool searchAndDisplayCustomers(string filename) {
         cout << "\nNo items found with the inputted query!\n";
     }
 
+    // If no items found, return error;
     return has_required_item;
 }
