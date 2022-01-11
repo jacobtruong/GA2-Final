@@ -428,35 +428,39 @@ vector<Customer *> fetchCustomers(string filename) {
         int num_word = words.size();
 
         if (words.at(4) == "Guest") {
-            GuestAccount* ga = new GuestAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(5)));
+            GuestAccount* ga = new GuestAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(6)), stoi(words.at(5)), items);
             if (num_word == 7) {
+                customer_list.push_back(ga);
                 continue;
             }
             else if (num_word > 7) {
                 for (int i = 7; i < num_word; i++) {
                     items.push_back(words.at(i));
                 }
-                ga->setBorrowedItems(items);
+                customer_list.push_back(ga);
             }
+            ga->setBorrowedItems(items);
 
-            customer_list.push_back(ga);
         }
         else if (words.at(4) == "Regular") {
-            RegularAccount* ra = new RegularAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(5)));
+            RegularAccount* ra = new RegularAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(6)), stoi(words.at(5)), items);
             if (num_word == 7) {
+                customer_list.push_back(ra);
                 continue;
             }
             else if (num_word > 7) {
                 for (int i = 7; i < num_word; i++) {
                     items.push_back(words.at(i));
                 }
-                ra->setBorrowedItems(items);
+                customer_list.push_back(ra);
             }
-            customer_list.push_back(ra);
+            ra->setBorrowedItems(items);
+
         }
         else if (words.at(4) == "VIP") {
-            VIPAccount* va = new VIPAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(5)), stoi(words.at(7)));
+            VIPAccount* va = new VIPAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(6)), stoi(words.at(5)), stoi(words.at(7)), items);
             if (num_word == 8) {
+                customer_list.push_back(va);
                 continue;
             }
             else if (num_word > 8) {
@@ -465,7 +469,6 @@ vector<Customer *> fetchCustomers(string filename) {
                 }
                 va->setBorrowedItems(items);
             }
-            customer_list.push_back(va);
         }
     }
     return customer_list;
@@ -606,8 +609,78 @@ bool addStock(string filename) {
 }
 
 //• The ability to read data from and save the data to disk (e.g. text files). This applied for any updates to the customer list and the item list, as described above.
+// Done
+
 //• The ability to rent an item (hence decreasing the number of copies held in stock). It should not be possible to rent an item for which there are no copies held in stock. In this case, the item’s rental status should be ‘not available’ or ‘borrowed’.
+bool borrowFunc(string items_file, string customers_file) {
+    vector<Item*> items = fetchItems(items_file);
+    vector<Customer *> customers = fetchCustomers(customers_file);
+    string input;
+    int updating_customer_index, updating_item_index;
+
+    cout << "Please input borrower's ID: ";
+    getline(cin, input);
+
+    if (search(input, customers) != -1) {
+        updating_customer_index = search(input, customers);
+    }
+    else {
+        cout << "Customer not found in database. Please try again\n";
+        return false;
+    }
+
+    cout << "Please input the ID of the item being borrowed: ";
+    getline(cin, input);
+
+    if (search(input, items) != -1) {
+        updating_item_index = search(input, items);
+    }
+    else {
+        cout << "Item not found in database. Please try again\n";
+        return false;
+    }
+
+    customers.at(updating_customer_index)->borrowing(items.at(updating_item_index));
+
+    updateFile(items_file, items);
+    updateFile(customers_file, customers);
+}
+
 //• The ability to return an item (hence increasing the number of copies held in stock).
+bool returnFunc(string items_file, string customers_file) {
+    vector<Item*> items = fetchItems(items_file);
+    vector<Customer*> customers = fetchCustomers(customers_file);
+    string input;
+    int updating_customer_index, updating_item_index;
+
+    cout << "Please input returner's ID: ";
+    getline(cin, input);
+
+    if (search(input, customers) != -1) {
+        updating_customer_index = search(input, customers);
+    }
+    else {
+        cout << "Customer not found in database. Please try again\n";
+        return false;
+    }
+
+    cout << "Please input the ID of the item being returned: ";
+    getline(cin, input);
+
+    if (search(input, items) != -1) {
+        updating_item_index = search(input, items);
+    }
+    else {
+        cout << "Item not found in database. Please try again\n";
+        return false;
+    }
+
+    customers.at(updating_customer_index)->returning(items.at(updating_item_index));
+
+    updateFile(items_file, items);
+    updateFile(customers_file, customers);
+}
+
 //• The ability to promote a customer (from Guest to Regular or from Regular to VIP).
 //• The ability to display all items, sorted by titles or IDs.
 //• The ability to display all customer, sorted by names or IDs.
