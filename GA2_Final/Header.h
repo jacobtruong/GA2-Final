@@ -105,6 +105,7 @@ bool check_user_input_sub_menu_1(int input) {
 	}
 }
 
+// Checking the value of input for sub menu 1.2
 bool check_user_input_sub_menu_1_2(int input) {
 	if (input > 0 && input <= 2) {
 		return true;
