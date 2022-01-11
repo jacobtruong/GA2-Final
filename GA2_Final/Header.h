@@ -38,6 +38,14 @@ void print_sub_menu_2() {
 		endl << " 3. Back to main menu." << endl;
 }
 
+// Print sub menu 2.2 interface
+void print_sub_menu_1_2() {
+	cout << "Please choose which option you want to update an existing customer" <<
+		endl << " 1. Update all attributes " <<
+		endl << " 2. Update the number of stock" << endl;
+}
+
+
 // Print sub menu 9 interface
 void print_sub_menu_9() {
 	cout << "9. Display group of customers" <<

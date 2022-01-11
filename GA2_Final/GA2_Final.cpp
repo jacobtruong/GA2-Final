@@ -52,6 +52,7 @@ int main(int argc, char* argv[]) {
 							break;
 						case 2:
 							//1.2 Update the existing item function
+							print_sub_menu_1_2();
 							updateItem("Items.txt");
 							break;
 						case 3:
