@@ -175,7 +175,7 @@ int inputItemLoanType() {
 int inputItemStock() {
     string string_input;
     do {
-        cout << "Please input valid stock number (integer only): ";
+        cout << "Please input valid stock number (positive integer only): ";
         getline(cin, string_input);
     } while (!check_user_input_int(string_input) || (stoi(string_input) < 0));
     return stoi(string_input);
@@ -646,6 +646,7 @@ bool addStock(string filename) {
     cout << "Input the item to increase the stock!\n";
     item_id = inputItemID();
 
+    // If item is not found in the list, return false and stop the function
     if (search(item_id, items) != -1) {
         updating_item_index = search(item_id, items);
     }
@@ -655,31 +656,41 @@ bool addStock(string filename) {
     }
 
     do {
-        cout << "Please enter number of items being added: ";
+        cout << "Please enter number of items being added/subtracted: ";
         getline(cin, input);
     } while (!check_user_input_int(input));
     increment = stoi(input);
 
+    // Set stock to current stock + increment (which can be a decrease instock if increment is negative)
     items.at(updating_item_index)->setStock(items.at(updating_item_index)->getStock() + increment);
 
+    // Call function to update the file with the updated list
     updateFile(filename, items);
 
     return true;
 }
 
-// The ability to read data from and save the data to disk (e.g. text files). This applied for any updates to the customer list and the item list, as described above.
+// "The ability to read data from and save the data to disk (e.g. text files). This applied for any updates to the customer list and the item list, as described above."
 // Applied throughout the program to make sure everything works correctly
 
-// The ability to rent an item (hence decreasing the number of copies held in stock). It should not be possible to rent an item for which there are no copies held in stock. In this case, the item’s rental status should be ‘not available’ or ‘borrowed’.
+// "The ability to rent an item (hence decreasing the number of copies held in stock). It should not be possible to rent an item for which there are no copies held in stock. In this case, the item’s rental status should be ‘not available’ or ‘borrowed’."
+
+// Function to facilitate the borrowing of items
 bool borrowFunc(string items_file, string customers_file) {
+    // Fetch all current items from file
     vector<Item*> items = fetchItems(items_file);
+
+    // Fetch all current customers from file
     vector<Customer *> customers = fetchCustomers(customers_file);
+
+
     string input;
     int updating_customer_index, updating_item_index;
 
     cout << "Input the borrowing customer!\n";
     input = inputCustomerID();
 
+    // If customer is not found in the list, return false and stop the function
     if (search(input, customers) != -1) {
         updating_customer_index = search(input, customers);
     }
@@ -691,6 +702,7 @@ bool borrowFunc(string items_file, string customers_file) {
     cout << "Input the item being borrowed!\n";
     input = inputItemID();
 
+    // If item is not found in the list, return false and stop the function
     if (search(input, items) != -1) {
         updating_item_index = search(input, items);
     }
@@ -699,24 +711,32 @@ bool borrowFunc(string items_file, string customers_file) {
         return false;
     }
 
+    // Initiate borrowing
     customers.at(updating_customer_index)->borrowing(items.at(updating_item_index));
 
+    // Call functions to update the items and customers files with the updated lists
     updateFile(items_file, items);
     updateFile(customers_file, customers);
 
     return true;
 }
 
-//• The ability to return an item (hence increasing the number of copies held in stock).
+// "The ability to return an item (hence increasing the number of copies held in stock)."
+// Function to facilitate the returning of items
 bool returnFunc(string items_file, string customers_file) {
+    // Fetch all current items from file
     vector<Item*> items = fetchItems(items_file);
+
+    // Fetch all current customers from file
     vector<Customer*> customers = fetchCustomers(customers_file);
+
     string input;
     int updating_customer_index, updating_item_index;
 
     cout << "Input the returning customer!\n";
     input = inputCustomerID();
 
+    // If customer is not found in the list, return false and stop the function
     if (search(input, customers) != -1) {
         updating_customer_index = search(input, customers);
     }
@@ -728,6 +748,7 @@ bool returnFunc(string items_file, string customers_file) {
     cout << "Input the item being returned!\n";
     input = inputItemID();
 
+    // If item is not found in the list, return false and stop the function
     if (search(input, items) != -1) {
         updating_item_index = search(input, items);
     }
