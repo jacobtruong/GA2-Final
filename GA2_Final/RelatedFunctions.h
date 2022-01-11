@@ -149,12 +149,12 @@ int inputItemStock() {
 }
 
 float inputItemRentalFee() {
-    float float_input;
+    string float_input;
     do {
         cout << "Please input valid rental fee: ";
-        cin >> float_input;
-    } while (float_input < 0);
-    return float_input;
+        getline(cin, float_input);
+    } while (stof(float_input) < 0);
+    return stof(float_input);
 }
 
 //• The ability to add, update and delete items from the database of stocked items.
