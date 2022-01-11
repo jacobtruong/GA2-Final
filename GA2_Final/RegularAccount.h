@@ -17,7 +17,6 @@ public:
 	bool returning(Item* item);
 
 	void writeToFile(string filename);
-	void display();
 
 	friend ostream& operator<< (ostream& out, const RegularAccount& csm);
 };

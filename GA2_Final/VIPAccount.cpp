@@ -99,7 +99,19 @@ void VIPAccount::writeToFile(string filename) {
 }
 
 void VIPAccount::display() {
-	cout << *this;
+	cout << "Customer: " << endl;
+	cout << "- ID: " << getID() <<
+		endl << "- Name: " << getName() <<
+		endl << "- Address: " << getAddress() <<
+		endl << "- Phone Number: " << getPhone() <<
+		endl << "- Account Type: " << getType() <<
+		endl << "- Return Count: " << getReturnCount() <<
+		endl << "- Number of Items Borrowed: " << getNumBorrowed() <<
+		endl << "- Reward Point: " << this->getPoint() << 
+		endl << "- Borrowed Items: " << endl;
+		for (int i = 0; i < this->getNumBorrowed(); i++) {
+			cout << this->getBorrowedItems().at(i) << endl;
+		}
 }
 
 ostream& operator<<(ostream& out, const VIPAccount& csm)
