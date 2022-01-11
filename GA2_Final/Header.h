@@ -96,18 +96,18 @@ void print_sub_menu_10_2() {
 // Take user's string input function
 string user_input(string& input) {
     cout << "Choose the action you want to do: ";
-    cin >> input;
+    getline(cin, input);
     cout << '\n';
     return input;
 }
 
-// Take user's int input function
-int user_input(int& input) {
-    cout << "Choose the action you want to do: ";
-    cin >> input;
-    cout << '\n';
-    return input;
-}
+//// Take user's int input function
+//int user_input(int& input) {
+//    cout << "Choose the action you want to do: ";
+//    
+//    cout << '\n';
+//    return input;
+//}
 
 // Checking the Exit string
 bool check_user_input_menu(string input) {
