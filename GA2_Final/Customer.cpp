@@ -57,7 +57,7 @@ void Customer::setReturnCount(int return_count)
 	this->return_count = return_count;
 }
 
-void Customer::setBorrowedItems(vector<Item *>& item)
+void Customer::setBorrowedItems(vector<string>& item)
 {
 	this->borrowed_items = item;
 }
@@ -111,7 +111,7 @@ int Customer::getNumBorrowed()
 	return this->num_borrowed;
 }
 
-vector<Item *>& Customer::getBorrowedItems() {
+vector<string>& Customer::getBorrowedItems() {
 	return this->borrowed_items;
 }
 

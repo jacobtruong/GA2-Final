@@ -34,8 +34,16 @@ int main(int argc, char* argv[]) {
     //    c[i]->borrowing(item[2]);
     //    c[i]->borrowing(item[3]);
     //    cout << endl;
+    //    //c[i]->returning(item[0]);
+    //    //c[i]->returning(item[1]);
+    //    //c[i]->returning(item[2]);
+    //    //c[i]->returning(item[3]);
     //    c[i]->writeToFile("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
     //    cout << endl;
+    //}
+
+    //for (Item * it : item) {
+    //    it->display();
     //}
 
     //VideoGame* i0 = (VideoGame*)item[0];

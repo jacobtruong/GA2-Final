@@ -53,7 +53,7 @@ bool GuestAccount::borrowing(Item* item)
 			return false;
 		}
 		cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
-		this->getBorrowedItems().push_back(item);
+		this->getBorrowedItems().push_back(item->getID());
 		setNumBorrowed(getNumBorrowed() + 1);
 		return true;
 	}
@@ -67,7 +67,7 @@ bool GuestAccount::returning(Item* item)
 {
 	// Check if the member has borrowed this item, return the item
 	for (int i = 0; i < this->getBorrowedItems().size(); i++) {
-		if (item->getID() == this->getBorrowedItems().at(i)->getID()) {
+		if (item->getID() == this->getBorrowedItems().at(i)) {
 			if (!(item->returning())) {
 				cout << "Unexpected error with returning process!\n";
 				return false;
@@ -97,15 +97,15 @@ void GuestAccount::display() {
 ostream& operator<<(ostream& out, const GuestAccount& csm)
 {
 	GuestAccount a = csm;
-	out << a.getID() << ";" << a.getName() << ";" << a.getAddress() << ";" << a.getPhone() << ";" << a.getType() << ";" << a.getReturnCount() << ";" << a.getNumBorrowed() << ";";
+	out << a.getID() << "," << a.getName() << "," << a.getAddress() << "," << a.getPhone() << "," << a.getType() << "," << a.getReturnCount() << "," << a.getNumBorrowed() << ",";
 	
 	for (int i = 0; i < a.getBorrowedItems().size(); i++) {
-		out << "[" << a.getBorrowedItems().at(i)->toStr() << "]";
+		out << a.getBorrowedItems().at(i);
 		if (i == a.getBorrowedItems().size() - 1) {
 			continue;
 		}
 		else {
-			out << ";";
+			out << ",";
 		}
 	}
 

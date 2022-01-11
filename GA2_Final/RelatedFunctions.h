@@ -391,8 +391,8 @@ vector<Customer *> fetchCustomers(string filename) {
     while (getline(ifile, line)) {
         stringstream ss(line);
         vector<string> words;
-        vector<Item *> items;
-        while (getline(ss, word, ';')) {
+        vector<string> items;
+        while (getline(ss, word, ',')) {
             words.push_back(word);
         }
 
@@ -405,7 +405,7 @@ vector<Customer *> fetchCustomers(string filename) {
             }
             else if (num_word > 7) {
                 for (int i = 7; i < num_word; i++) {
-                    items.push_back(processItemFromCustomer(words.at(i)));
+                    items.push_back(words.at(i));
                 }
                 ga->setBorrowedItems(items);
             }
@@ -419,7 +419,7 @@ vector<Customer *> fetchCustomers(string filename) {
             }
             else if (num_word > 7) {
                 for (int i = 7; i < num_word; i++) {
-                    items.push_back(processItemFromCustomer(words.at(i)));
+                    items.push_back(words.at(i));
                 }
                 ra->setBorrowedItems(items);
             }
@@ -432,7 +432,7 @@ vector<Customer *> fetchCustomers(string filename) {
             }
             else if (num_word > 8) {
                 for (int i = 8; i < num_word; i++) {
-                    items.push_back(processItemFromCustomer(words.at(i)));
+                    items.push_back(words.at(i));
                 }
                 va->setBorrowedItems(items);
             }
@@ -496,7 +496,7 @@ bool addCustomer(string filename) {
 // Update
 // Special note: As not to interfere with the system, only ID, Name, Address, Phone, and Type could be changed
 bool updateCustomer(string filename) {
-
+    return false;
 }
 
 //• The ability to increase the number of copies of an existing item (this is done when new stock arrives).
