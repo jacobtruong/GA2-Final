@@ -9,11 +9,8 @@ int main(int argc, char* argv[]) {
     addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
     addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");*/
 
-    vector<Customer *> vec = fetchCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-    
-    for (Customer* c : vec) {
-        c->display();
-    }
+    /*updateCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");*/
+    addStock("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
 
     //// Borrowing testing
     //Item* item[4];

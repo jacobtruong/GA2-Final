@@ -47,10 +47,45 @@ vector<Item*> fetchItems(string filename) {
     return item_list;
 }
 
+bool updateFile(string filename, vector<Customer*> &customers) {
+    ofstream file;
+    file.open(filename, ios::trunc);
+    file.close();
+
+    for (Customer* c : customers) {
+        c->writeToFile(filename);
+    }
+
+    return true;
+}
+
+bool updateFile(string filename, vector<Item*>& items) {
+    ofstream file;
+    file.open(filename, ios::trunc);
+    file.close();
+
+    for (Item * i : items) {
+        i->writeToFile(filename);
+    }
+
+    return true;
+}
+
 int search(string id, vector<Item *> &items) {
     int index = 0;
     for (Item * i : items) {
         if (id == i->getID()) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
+}
+
+int search(string id, vector<Customer *>& customers) {
+    int index = 0;
+    for (Customer * c : customers) {
+        if (id == c->getID()) {
             return index;
         }
         index++;
@@ -201,7 +236,7 @@ bool updateItem(string filename) {
     string id, title, genre, rental_type;
     int type, stock;
     float fee;
-    
+
     id = inputItemID();
     title = inputItemTitle();
     rental_type = inputItemRentalType();
@@ -227,13 +262,7 @@ bool updateItem(string filename) {
         items.at(updating_item_index) = omr;
     }
 
-    ofstream file;
-    file.open(filename, ios::trunc);
-    file.close();
-
-    for (Item* i : items) {
-        i->writeToFile(filename);
-    }
+    updateFile(filename, items);
 
     return true;
 }
@@ -496,10 +525,86 @@ bool addCustomer(string filename) {
 // Update
 // Special note: As not to interfere with the system, only ID, Name, Address, Phone, and Type could be changed
 bool updateCustomer(string filename) {
-    return false;
+    vector<Customer *> customers = fetchCustomers(filename);
+    int updating_item_index;
+    string string_input;
+
+    cout << "Please enter the ID of the Customer you want to update: ";
+    getline(cin, string_input);
+
+    if (search(string_input, customers) != -1) {
+        updating_item_index = search(string_input, customers);
+    }
+    else {
+        cout << "Customer not found in database. Please try again\n";
+        return false;
+    }
+
+    customers.at(updating_item_index)->display();
+
+    cout << "\nPlease re-input the following information to update the selected customer:\n";
+    // Item attributes
+    string id, name, address, phone, type;
+    int point;
+
+    id = inputCustomerID();
+    name = inputCustomerName();
+    address = inputCustomerAddress();
+    phone = inputCustomerPhone();
+    type = inputCustomerType();
+
+    if (type == "VIP") {
+        point = inputCustomerPoint();
+    }
+
+    if (type == "Guest") {
+        GuestAccount* ga = new GuestAccount(id, name, address, phone, customers.at(updating_item_index)->getNumBorrowed(), customers.at(updating_item_index)->getReturnCount(), customers.at(updating_item_index)->getBorrowedItems());
+        customers.at(updating_item_index) = ga;
+    }
+    else if (type == "Regular") {
+        RegularAccount* ra = new RegularAccount(id, name, address, phone, customers.at(updating_item_index)->getNumBorrowed(), customers.at(updating_item_index)->getReturnCount(), customers.at(updating_item_index)->getBorrowedItems());
+        customers.at(updating_item_index) = ra;
+    }
+    else {
+        VIPAccount* va = new VIPAccount(id, name, address, phone, customers.at(updating_item_index)->getNumBorrowed(), customers.at(updating_item_index)->getReturnCount(), point, customers.at(updating_item_index)->getBorrowedItems());
+        customers.at(updating_item_index) = va;
+    }
+
+    updateFile(filename, customers);
+
+    return true;
 }
 
 //• The ability to increase the number of copies of an existing item (this is done when new stock arrives).
+bool addStock(string filename) {
+    string input, item_id;
+    int updating_item_index, increment;
+    vector<Item*> items = fetchItems(filename);
+
+    cout << "Please enter item ID to add to stock: ";
+    getline(cin, item_id);
+
+    if (search(item_id, items) != -1) {
+        updating_item_index = search(item_id, items);
+    }
+    else {
+        cout << "Item not found in database. Please try again\n";
+        return false;
+    }
+
+    do {
+        cout << "Please enter number of items being added: ";
+        getline(cin, input);
+    } while (!check_user_input_int(input));
+    increment = stoi(input);
+
+    items.at(updating_item_index)->setStock(items.at(updating_item_index)->getStock() + increment);
+
+    updateFile(filename, items);
+
+    return true;
+}
+
 //• The ability to read data from and save the data to disk (e.g. text files). This applied for any updates to the customer list and the item list, as described above.
 //• The ability to rent an item (hence decreasing the number of copies held in stock). It should not be possible to rent an item for which there are no copies held in stock. In this case, the item’s rental status should be ‘not available’ or ‘borrowed’.
 //• The ability to return an item (hence increasing the number of copies held in stock).
