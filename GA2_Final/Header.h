@@ -105,6 +105,16 @@ bool check_user_input_sub_menu_1(int input) {
 	}
 }
 
+bool check_user_input_sub_menu_1_2(int input) {
+	if (input > 0 && input <= 2) {
+		return true;
+	}
+	else {
+		cout << "Not available. Please choose an action from the menu." << endl;
+		return false;
+	}
+}
+
 // Checking the value of input for sub menu 2
 bool check_user_input_sub_menu_2(int input) {
 	if (input > 0 && input <= 3) {
