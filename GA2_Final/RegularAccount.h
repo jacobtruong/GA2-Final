@@ -10,7 +10,7 @@ public:
 	RegularAccount();
 	RegularAccount(string id, string name, string address, string phone);
 	RegularAccount(string id, string name, string address, string phone, int return_count);
-	RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item *> borrowed_items);
+	RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<string> borrowed_items);
 	~RegularAccount();
 
 	bool borrowing(Item* item);

@@ -15,7 +15,7 @@ private:
 	string type;
 	int return_count;
 	int num_borrowed;
-	vector<Item *> borrowed_items;
+	vector<string> borrowed_items;
 
 public:
 	Customer();
@@ -29,7 +29,7 @@ public:
 	void setType(string type);
 	void setReturnCount(int return_count);
 	void setNumBorrowed(int num_borrowed);
-	void setBorrowedItems(vector<Item *>& item);
+	void setBorrowedItems(vector<string>& item);
 	void setAll(string id, string name, string address, string phone, string type);
 
 	string getID();
@@ -39,7 +39,7 @@ public:
 	string getType();
 	int getReturnCount();
 	int getNumBorrowed();
-	vector<Item *>& getBorrowedItems();
+	vector<string>& getBorrowedItems();
 	virtual bool borrowing(Item * item) = 0;
 	virtual bool returning(Item * item) = 0;
 	void promotion();

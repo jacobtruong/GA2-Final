@@ -23,7 +23,7 @@ VIPAccount::VIPAccount(string id, string name, string address, string phone, int
 	this->point = point;
 }
 
-VIPAccount::VIPAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, int point, vector<Item *> borrowed_items) {
+VIPAccount::VIPAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, int point, vector<string> borrowed_items) {
 	setAll(id, name, address, phone, "VIP");
 	setNumBorrowed(num_borrowed);
 	setReturnCount(return_count);

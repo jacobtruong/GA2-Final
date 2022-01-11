@@ -21,7 +21,7 @@ RegularAccount::RegularAccount(string id, string name, string address, string ph
 	this->setNumBorrowed(0);
 }
 
-RegularAccount::RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item *> borrowed_items) {
+RegularAccount::RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<string> borrowed_items) {
 	setAll(id, name, address, phone, "Regular");
 	setNumBorrowed(num_borrowed);
 	setReturnCount(return_count);

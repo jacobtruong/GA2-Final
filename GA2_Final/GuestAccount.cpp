@@ -21,7 +21,7 @@ GuestAccount::GuestAccount(string id, string name, string address, string phone,
 	this->setNumBorrowed(0);
 }
 
-GuestAccount::GuestAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item *> borrowed_items) {
+GuestAccount::GuestAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<string> borrowed_items) {
 	setAll(id, name, address, phone, "Guest");
 	setNumBorrowed(num_borrowed);
 	setReturnCount(return_count);
