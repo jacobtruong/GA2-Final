@@ -107,7 +107,8 @@ void VIPAccount::display() {
 		endl << "- Account Type: " << getType() <<
 		endl << "- Return Count: " << getReturnCount() <<
 		endl << "- Number of Items Borrowed: " << getNumBorrowed() <<
-		endl << "- Reward Point: " << this->getPoint() << endl;
+		endl << "- Reward Point: " << this->getPoint()
+		<< endl << "- Borrowed Items: " << endl;
 		for (int i = 0; i < this->getNumBorrowed(); i++) {
 			cout << this->getBorrowedItems().at(i) << endl;
 		}
