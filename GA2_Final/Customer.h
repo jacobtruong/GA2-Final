@@ -42,10 +42,6 @@ public:
 	vector<string>& getBorrowedItems();
 	virtual bool borrowing(Item * item) = 0;
 	virtual bool returning(Item * item) = 0;
-	void promotion();
-	void add_account();
-	void update_account();
-	void print_info();
 
 	virtual void writeToFile(string filename);
 	virtual void display();

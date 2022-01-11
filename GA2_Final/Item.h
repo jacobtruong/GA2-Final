@@ -20,7 +20,7 @@ public:
 	Item();
 	Item(string id, string title, int loan_type, int stock, float rental_fee);
 	~Item();
-
+	
 	void setID(string id);
 	void setTitle(string title);
 	void setLoanType(int loan_type);
@@ -37,9 +37,9 @@ public:
 	int getStock();
 	float getRentalFee();
 	bool getStatus();
+
 	bool borrowing();
 	bool returning();
-
 	virtual void writeToFile(string filename);
 	virtual void display();
 	virtual string toStr();

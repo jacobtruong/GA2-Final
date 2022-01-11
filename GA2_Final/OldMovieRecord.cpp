@@ -1,5 +1,6 @@
 #include "OldMovieRecord.h"
 
+// Old Movie Record's contructor implementation
 OldMovieRecord::OldMovieRecord() {
 	setAll("", "", "Old Movie Record", 0, 0, 0);
 }
@@ -14,10 +15,12 @@ OldMovieRecord::OldMovieRecord(string id, string title, string genre, int loan_t
 	}
 }
 
+// Old Movie Record's detructor implementation
 OldMovieRecord::~OldMovieRecord() {
 
 }
 
+// set functions
 void OldMovieRecord::setGenre(string genre) {
 	this->genre = genre;
 }
@@ -26,6 +29,7 @@ string OldMovieRecord::getGenre() {
 	return genre;
 }
 
+// Write to file functions
 void OldMovieRecord::writeToFile(string filename) {
 	ofstream file;
 	file.open(filename, ios::app);
@@ -33,6 +37,7 @@ void OldMovieRecord::writeToFile(string filename) {
 	file.close();
 }
 
+// Display Old Movie Record on the console
 void OldMovieRecord::display() {
 	cout << "Item: " << endl;
 	cout << "- ID: " << getID() <<
@@ -64,6 +69,7 @@ string OldMovieRecord::toStr()
 	return ss.str();
 }
 
+// Operator Declaration
 ostream& operator<< (ostream& out, const OldMovieRecord& item) {
 	OldMovieRecord i = item;
 	out << i.getID() << "," << i.getTitle() << "," << i.getRentalType() << "," << i.getGenre() << "," << i.getLoanType() << "," << i.getStock() << "," << i.getRentalFee() << "," << i.getStatus() << endl;

@@ -1,6 +1,6 @@
 #include "Customer.h"
 #include "Item.h"
-
+// Customer's contructor implementation
 Customer::Customer()
 {
 	this->id = "";
@@ -23,10 +23,12 @@ Customer::Customer(string id, string name, string address, string phone, string 
 	this->num_borrowed = 0;
 }
 
+// Customer's detructor implementation
 Customer::~Customer()
 {
 }
 
+// Customer's set functions
 void Customer::setID(string id)
 {
 	this->id = id;
@@ -76,6 +78,7 @@ void Customer::setNumBorrowed(int num_borrowed)
 	this->num_borrowed = num_borrowed;
 }
 
+// Customer' get functions
 string Customer::getID()
 {
 	return this->id;
@@ -115,9 +118,11 @@ vector<string>& Customer::getBorrowedItems() {
 	return this->borrowed_items;
 }
 
+// Write to file function
 void Customer::writeToFile(string filename) {
 }
 
+// Display on the console function.
 void Customer::display() {
 	cout << "Customer: " << endl;
 	cout << "- ID: " << getID() <<
@@ -135,31 +140,5 @@ void Customer::display() {
 	cout << "\n";
 }
 
-// I think promote 
-//void Customer::promotion() {
-//	if (this->getType() == "Guest" && this->getReturnCount() >= 3) {
-//		this->setType("Regular");
-//		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to Regular Account." << endl;
-//		this->setReturnCount(0);
-//	}
-//	else {
-//		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to Regular Account." << endl;
-//	}
-//
-//	if (this->getType() == "Regular" && this->getReturnCount() >= 3) {
-//		this->setType("VIP");
-//		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to VIP Account." << endl;
-//		this->setReturnCount(0);
-//	}
-//	else {
-//		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to VIP Account." << endl;
-//	}
-//}
 
-void Customer::add_account()
-{
-}
 
-void Customer::update_account()
-{
-}

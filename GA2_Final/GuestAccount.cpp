@@ -1,6 +1,7 @@
 #include "GuestAccount.h"
 #include "Customer.h"
 
+// Guest Account's Contructor Implementation
 GuestAccount::GuestAccount()
 {
 	setAll("", "", "", "", "Guest");
@@ -28,10 +29,12 @@ GuestAccount::GuestAccount(string id, string name, string address, string phone,
 	setBorrowedItems(borrowed_items);
 }
 
+// Guest Account's Detructor Implementation
 GuestAccount::~GuestAccount()
 {
 }
 
+// Borrowing Function for Guest Account
 bool GuestAccount::borrowing(Item* item)
 {
 	// Check if it is 2-day item
@@ -63,6 +66,7 @@ bool GuestAccount::borrowing(Item* item)
 	}
 }
 
+// Returning Fucntion for Guest Account
 bool GuestAccount::returning(Item* item)
 {
 	// Check if the Customer has borrowed this item, return the item
@@ -84,6 +88,7 @@ bool GuestAccount::returning(Item* item)
 	return false;
 }
 
+// Write to File functions
 void GuestAccount::writeToFile(string filename) {
 	ofstream file;
 	file.open(filename, ios::app);
@@ -91,6 +96,7 @@ void GuestAccount::writeToFile(string filename) {
 	file.close();
 }
 
+// Operator Declaration 
 ostream& operator<<(ostream& out, const GuestAccount& csm)
 {
 	GuestAccount a = csm;
