@@ -41,7 +41,13 @@ void OldMovieRecord::display() {
 		endl << "- Genre: " << this->getGenre() <<
 		endl << "- Stock: " << getStock() <<
 		endl << "- Rental Fee: " << getRentalFee() <<
-		endl << "- Status: " << getStatus() << endl;
+		endl << "- Status: ";
+	if (getStatus()) {
+		cout << "True" << endl;
+	}
+	else {
+		cout << "False" << endl;
+	}
 }
 
 string OldMovieRecord::toStr()

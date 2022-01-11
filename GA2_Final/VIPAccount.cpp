@@ -110,7 +110,7 @@ void VIPAccount::display() {
 		endl << "- Reward Point: " << this->getPoint() << 
 		endl << "- Borrowed Items: " << endl;
 		for (int i = 0; i < this->getNumBorrowed(); i++) {
-			cout << this->getBorrowedItems().at(i) << endl;
+			cout << "\t\t" << "+ " << this->getBorrowedItems().at(i) << endl;
 		}
 }
 
