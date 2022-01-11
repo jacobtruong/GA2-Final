@@ -53,7 +53,18 @@ int main(int argc, char* argv[]) {
 						case 2:
 							//1.2 Update the existing item function
 							print_sub_menu_1_2();
-							updateItem("Items.txt");
+							if (check_user_input_sub_menu_1_2(user_choice_int = stoi(user_input(user_choice)))) {
+								switch (user_choice_int) {
+								case 1:
+									updateItem("Items.txt");
+										break;
+								case 2:
+									addStock("Items.txt");
+										break;
+								default:
+									break;
+								}
+							}
 							break;
 						case 3:
 							//1.3 Delete the existing item
