@@ -1,4 +1,4 @@
-#include "RelatedFunctions.h"
+#include "CoreFunctions.h"
 
 int main(int argc, char* argv[]) {
 	// Driver code - below is the menu navigation

@@ -68,10 +68,10 @@
     <ClInclude Include="VIPAccount.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="MiscellaneousFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RelatedFunctions.h">
+    <ClInclude Include="CoreFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

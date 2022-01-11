@@ -14,7 +14,7 @@
 #include "GuestAccount.h"
 #include "RegularAccount.h"
 #include "VIPAccount.h"
-#include "Header.h"
+#include "MiscellaneousFunctions.h"
 
 // This function fetches items from an item file and return a vector of Item objects
 vector<Item*> fetchItems(string filename) {
@@ -635,7 +635,7 @@ bool updateCustomer(string filename) {
 }
 
 // "The ability to increase the number of copies of an existing item (this is done when new stock arrives)."
-// Function that adds or subtracts a certain number from current stock
+// Function that adds a certain number to current stock
 bool addStock(string filename) {
     // Fetch all current items from file
     vector<Item*> items = fetchItems(filename);
@@ -657,12 +657,12 @@ bool addStock(string filename) {
     }
 
     do {
-        cout << "Please enter number of items being added/subtracted: ";
+        cout << "Please enter number of items being added to stock (positive integer only): ";
         getline(cin, input);
-    } while (!check_user_input_int(input));
+    } while (!check_user_input_int(input) || stoi(input) < 0);
     increment = stoi(input);
 
-    // Set stock to current stock + increment (which can be a decrease instock if increment is negative)
+    // Set stock to current stock + increment
     items.at(updating_item_index)->setStock(items.at(updating_item_index)->getStock() + increment);
 
     // Call function to update the file with the updated list
