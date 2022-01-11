@@ -37,10 +37,16 @@ void OldMovieRecord::display() {
 	cout << "Item: " << endl;
 	cout << "- ID: " << getID() <<
 		endl << "- Type: " << getTitle() <<
-		endl << "- Loan Type: " << getLoanType() <<
-		endl << "- Genre: " << this->getGenre() <<
+		endl << "- Loan Type: ";
+	if (getLoanType() == 1) {
+		cout << "2-day" << endl;
+	}
+	else {
+		cout << "1-week" << endl;
+	}
+		cout << "- Genre: " << this->getGenre() <<
 		endl << "- Stock: " << getStock() <<
-		endl << "- Rental Fee: " << getRentalFee() <<
+		endl << "- Rental Fee: " << getRentalFee() << " USD" <<
 		endl << "- Status: ";
 	if (getStatus()) {
 		cout << "True" << endl;
@@ -48,6 +54,7 @@ void OldMovieRecord::display() {
 	else {
 		cout << "False" << endl;
 	}
+	cout << "\n";
 }
 
 string OldMovieRecord::toStr()

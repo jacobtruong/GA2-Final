@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");*/
 
     /*updateCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");*/
-    addStock("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
+   /* addStock("E:\\Users\\Raven\\Documents\\Test\\Items.txt");*/
 
     //// Borrowing testing
     Item* item[4];
@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
     c[1] = new RegularAccount("C002", "Bob", "HCMC", "0909909090");
     //c[2] = new VIPAccount("C003", "Carl", "HCMC", "0909090999");
 
+    c[1]->borrowing(item[0]);
     //for (int i = 0; i < 3; i++) {
     //    cout << endl;
     //    c[i]->borrowing(item[0]);
@@ -59,4 +60,6 @@ int main(int argc, char* argv[]) {
     file << *item[0];
 
     return 0;*/
+    item[0]->display();
+    c[1]->display();
 }

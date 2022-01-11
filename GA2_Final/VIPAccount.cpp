@@ -112,6 +112,7 @@ void VIPAccount::display() {
 		for (int i = 0; i < this->getNumBorrowed(); i++) {
 			cout << "\t\t" << "+ " << this->getBorrowedItems().at(i) << endl;
 		}
+		cout << "\n";
 }
 
 ostream& operator<<(ostream& out, const VIPAccount& csm)

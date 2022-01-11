@@ -27,9 +27,15 @@ void VideoGame::display() {
 	cout << "Item: " << endl;
 	cout << "- ID: " << getID() <<
 		endl << "- Type: " << getTitle() <<
-		endl << "- Loan Type: " << getLoanType() <<
-		endl << "- Stock: " << getStock() <<
-		endl << "- Rental Fee: " << getRentalFee() <<
+		endl << "- Loan Type: ";
+	if (getLoanType() == 1) {
+		cout << "2-day" << endl;
+	}
+	else {
+		cout << "1-week" << endl;
+	}
+		cout << "- Stock: " << getStock() <<
+		endl << "- Rental Fee: " << getRentalFee() << " USD" <<
 		endl << "- Status: ";
 	if (getStatus()) {
 		cout << "True" << endl;
@@ -37,6 +43,7 @@ void VideoGame::display() {
 	else {
 		cout << "False" << endl;
 	}
+	cout << "\n";
 }
 
 string VideoGame::toStr()
