@@ -57,7 +57,7 @@ bool VIPAccount::borrowing(Item* item)
 			cout << "Unexpected error with borrowing process!\n";
 			return false;
 		}
-		cout << "VIP Member " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+		cout << "VIP Customer " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 		this->getBorrowedItems().push_back(item->getID());
 		setNumBorrowed(getNumBorrowed() + 1);
 		return true;
@@ -70,7 +70,7 @@ bool VIPAccount::borrowing(Item* item)
 
 bool VIPAccount::returning(Item* item)
 {
-	// Check if the member has borrowed this item, return the item
+	// Check if the Customer has borrowed this item, return the item
 	for (int i = 0; i < this->getBorrowedItems().size(); i++) {
 		if (item->getID() == this->getBorrowedItems().at(i)) {
 			if (!(item->returning())) {
@@ -78,8 +78,9 @@ bool VIPAccount::returning(Item* item)
 				return false;
 			}
 			getBorrowedItems().erase(getBorrowedItems().begin() + i);
-			cout << "VIP Member " << this->getName() << " (" << this->getID() << ")" << " has sucessfully returned item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+			cout << "VIP Customer " << this->getName() << " (" << this->getID() << ")" << " has sucessfully returned item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 			setNumBorrowed(getNumBorrowed() - 1);
+			setReturnCount(getReturnCount() + 1);
 
 			// Add rewards point
 			this->point += 10;
@@ -87,7 +88,7 @@ bool VIPAccount::returning(Item* item)
 		}
 	}
 	// If item was not found to have been borrowed, print error and return false
-	cout << "Regular Member " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+	cout << "Regular Customer " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 	return false;
 }
 

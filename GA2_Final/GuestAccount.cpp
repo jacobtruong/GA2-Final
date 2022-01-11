@@ -36,13 +36,13 @@ bool GuestAccount::borrowing(Item* item)
 {
 	// Check if it is 2-day item
 	if (item->getLoanType() == 1) {
-		cerr << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " cannot borrow item " << item->getTitle() << " (" << item->getID() << ")" << " because it's 2-day item!" << endl;
+		cerr << "Guest Customer " << this->getName() << " (" << this->getID() << ")" << " cannot borrow item " << item->getTitle() << " (" << item->getID() << ")" << " because it's 2-day item!" << endl;
 		return false;
 	}
 
-	// Check if the member has already borrowed 2 items
+	// Check if the Customer has already borrowed 2 items
 	if (this->getNumBorrowed() >= GUESTMAXRENT) {
-		cout << "Borrow failed because Guest Member " << this->getName() << " (" << this->getID() << ")" << " have reached borrow limit (" << GUESTMAXRENT << " items)!" << endl;
+		cout << "Borrow failed because Guest Customer " << this->getName() << " (" << this->getID() << ")" << " have reached borrow limit (" << GUESTMAXRENT << " items)!" << endl;
 		return false;
 	}
 	
@@ -52,7 +52,7 @@ bool GuestAccount::borrowing(Item* item)
 			cout << "Unexpected error with borrowing process!\n";
 			return false;
 		}
-		cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+		cout << "Guest Customer " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 		this->getBorrowedItems().push_back(item->getID());
 		setNumBorrowed(getNumBorrowed() + 1);
 		return true;
@@ -65,7 +65,7 @@ bool GuestAccount::borrowing(Item* item)
 
 bool GuestAccount::returning(Item* item)
 {
-	// Check if the member has borrowed this item, return the item
+	// Check if the Customer has borrowed this item, return the item
 	for (int i = 0; i < this->getBorrowedItems().size(); i++) {
 		if (item->getID() == this->getBorrowedItems().at(i)) {
 			if (!(item->returning())) {
@@ -73,13 +73,14 @@ bool GuestAccount::returning(Item* item)
 				return false;
 			}
 			getBorrowedItems().erase(getBorrowedItems().begin() + i);
-			cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " has sucessfully returned item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+			cout << "Guest Customer " << this->getName() << " (" << this->getID() << ")" << " has sucessfully returned item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 			setNumBorrowed(getNumBorrowed() - 1);
+			setReturnCount(getReturnCount() + 1);
 			return true;
 		}
 	}
 	// If item was not found to have been borrowed, print error and return false
-	cout << "Guest Member " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
+	cout << "Guest Customer " << this->getName() << " (" << this->getID() << ")" << " did not borrow item " << item->getTitle() << " (" << item->getID() << ")" << endl;
 	return false;
 }
 

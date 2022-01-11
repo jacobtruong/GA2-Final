@@ -134,34 +134,31 @@ void Customer::display() {
 	cout << "\n";
 }
 
-void Customer::promotion() {
-	if (this->getType() == "Guest" && this->getReturnCount() >= 3) {
-		this->setType("Regular");
-		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to Regular Account." << endl;
-		this->setReturnCount(0);
-	}
-	else {
-		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to Regular Account." << endl;
-	}
-
-	if (this->getType() == "Regular" && this->getReturnCount() >= 3) {
-		this->setType("VIP");
-		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to VIP Account." << endl;
-		this->setReturnCount(0);
-	}
-	else {
-		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to VIP Account." << endl;
-	}
-}
+// I think promote 
+//void Customer::promotion() {
+//	if (this->getType() == "Guest" && this->getReturnCount() >= 3) {
+//		this->setType("Regular");
+//		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to Regular Account." << endl;
+//		this->setReturnCount(0);
+//	}
+//	else {
+//		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to Regular Account." << endl;
+//	}
+//
+//	if (this->getType() == "Regular" && this->getReturnCount() >= 3) {
+//		this->setType("VIP");
+//		cout << "Account " << this->getID() << " " << this->getName() << " is promoted to VIP Account." << endl;
+//		this->setReturnCount(0);
+//	}
+//	else {
+//		cout << "Account " << this->getID() << " " << this->getName() << " is not able to be promoted to VIP Account." << endl;
+//	}
+//}
 
 void Customer::add_account()
 {
 }
 
 void Customer::update_account()
-{
-}
-
-void Customer::print_info()
 {
 }

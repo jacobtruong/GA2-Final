@@ -1,16 +1,17 @@
 #include "RelatedFunctions.h"
 
 int main(int argc, char* argv[]) {
-    /*addItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");*/
+    //addItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
     //updateItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-    deleteItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
+    //deleteItem("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
 
-    /*addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-    addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
-    addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");*/
+    //addCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
+    //updateCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
 
     //borrowFunc("E:\\Users\\Raven\\Documents\\Test\\Items.txt", "E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
     //returnFunc("E:\\Users\\Raven\\Documents\\Test\\Items.txt", "E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
+
+    //promoteCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
 
     /*vector<Customer*> vec = fetchCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
     for (Customer* i : vec) {

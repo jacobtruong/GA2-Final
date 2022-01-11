@@ -114,7 +114,7 @@ string inputItemTitle() {
 string inputItemRentalType() {
     string string_input;
     do {
-        cout << "Please input item type: ";
+        cout << "Please input item type (Video Game, DVD, or Old Movie Record): ";
         getline(cin, string_input);
     } while (string_input != "Video Game" && string_input != "DVD" && string_input != "Old Movie Record");
     return string_input;
@@ -180,7 +180,6 @@ bool addItem(string filename) {
     choice = stoi(string_input);
 
     cout << endl;
-
     
     id = inputItemID();
     title = inputItemTitle();
@@ -474,8 +473,9 @@ vector<Customer *> fetchCustomers(string filename) {
                 for (int i = 8; i < num_word; i++) {
                     items.push_back(words.at(i));
                 }
-                va->setBorrowedItems(items);
+                customer_list.push_back(va);
             }
+            va->setBorrowedItems(items);
         }
     }
     return customer_list;
@@ -538,9 +538,9 @@ bool updateCustomer(string filename) {
     vector<Customer *> customers = fetchCustomers(filename);
     int updating_item_index;
     string string_input;
-
-    cout << "Please enter the ID of the Customer you want to update: ";
-    getline(cin, string_input);
+    
+    cout << "Input the customer you want to update!\n";
+    string_input = inputCustomerID();
 
     if (search(string_input, customers) != -1) {
         updating_item_index = search(string_input, customers);
@@ -591,8 +591,8 @@ bool addStock(string filename) {
     int updating_item_index, increment;
     vector<Item*> items = fetchItems(filename);
 
-    cout << "Please enter item ID to add to stock: ";
-    getline(cin, item_id);
+    cout << "Input the item to increase the stock!\n";
+    item_id = inputItemID();
 
     if (search(item_id, items) != -1) {
         updating_item_index = search(item_id, items);
@@ -616,7 +616,7 @@ bool addStock(string filename) {
 }
 
 //• The ability to read data from and save the data to disk (e.g. text files). This applied for any updates to the customer list and the item list, as described above.
-// Done
+// Applied throughout the program to make sure everything works correctly
 
 //• The ability to rent an item (hence decreasing the number of copies held in stock). It should not be possible to rent an item for which there are no copies held in stock. In this case, the item’s rental status should be ‘not available’ or ‘borrowed’.
 bool borrowFunc(string items_file, string customers_file) {
@@ -625,8 +625,8 @@ bool borrowFunc(string items_file, string customers_file) {
     string input;
     int updating_customer_index, updating_item_index;
 
-    cout << "Please input borrower's ID: ";
-    getline(cin, input);
+    cout << "Input the borrowing customer!\n";
+    input = inputCustomerID();
 
     if (search(input, customers) != -1) {
         updating_customer_index = search(input, customers);
@@ -636,8 +636,8 @@ bool borrowFunc(string items_file, string customers_file) {
         return false;
     }
 
-    cout << "Please input the ID of the item being borrowed: ";
-    getline(cin, input);
+    cout << "Input the item being borrowed!\n";
+    input = inputItemID();
 
     if (search(input, items) != -1) {
         updating_item_index = search(input, items);
@@ -651,6 +651,8 @@ bool borrowFunc(string items_file, string customers_file) {
 
     updateFile(items_file, items);
     updateFile(customers_file, customers);
+
+    return true;
 }
 
 //• The ability to return an item (hence increasing the number of copies held in stock).
@@ -660,8 +662,8 @@ bool returnFunc(string items_file, string customers_file) {
     string input;
     int updating_customer_index, updating_item_index;
 
-    cout << "Please input returner's ID: ";
-    getline(cin, input);
+    cout << "Input the returning customer!\n";
+    input = inputCustomerID();
 
     if (search(input, customers) != -1) {
         updating_customer_index = search(input, customers);
@@ -671,8 +673,8 @@ bool returnFunc(string items_file, string customers_file) {
         return false;
     }
 
-    cout << "Please input the ID of the item being returned: ";
-    getline(cin, input);
+    cout << "Input the item being returned!\n";
+    input = inputItemID();
 
     if (search(input, items) != -1) {
         updating_item_index = search(input, items);
@@ -686,9 +688,55 @@ bool returnFunc(string items_file, string customers_file) {
 
     updateFile(items_file, items);
     updateFile(customers_file, customers);
+
+    return true;
 }
 
-//• The ability to promote a customer (from Guest to Regular or from Regular to VIP).
+// The ability to promote a customer (from Guest to Regular or from Regular to VIP).
+bool promoteCustomer(string filename) {
+    vector<Customer*> customers = fetchCustomers(filename);
+    
+    string input;
+    int updating_customer_index;
+
+    cout << "Input the customer you want to promote!\n";
+    input = inputCustomerID();
+
+    if (search(input, customers) != -1) {
+        updating_customer_index = search(input, customers);
+    }
+    else {
+        cout << "Customer not found in database. Please try again\n";
+        return false;
+    }
+
+    Customer* csm = customers.at(updating_customer_index);
+
+    if (csm->getType() == "VIP") {
+        cout << "VIP Customer cannot be promoted!\n";
+        return false;
+    }
+
+    if (csm->getReturnCount() < 3) {
+        cout << csm->getType() << " Customer " << csm->getName() << " (" << csm->getID() << ")" << " has not returned sufficient number of items (Current return count: " << csm->getReturnCount() << ")\n";
+        return false;
+    }
+
+    if (csm->getType() == "Guest") {
+        RegularAccount* ra = new RegularAccount(csm->getID(), csm->getName(), csm->getAddress(), csm->getPhone(), csm->getNumBorrowed(), 0, csm->getBorrowedItems());
+        customers.at(updating_customer_index) = ra;
+        cout << "Guest Customer " << csm->getName() << " (" << csm->getID() << ")" << " has been promoted to Regular Customer!\n";
+    }
+    else if (csm->getType() == "Regular") {
+        VIPAccount* va = new VIPAccount(csm->getID(), csm->getName(), csm->getAddress(), csm->getPhone(), csm->getNumBorrowed(), 0, 0, csm->getBorrowedItems());
+        customers.at(updating_customer_index) = va;
+        cout << "Regular Customer " << csm->getName() << " (" << csm->getID() << ")" << " has been promoted to VIP Customer!\n";
+    }
+
+    updateFile(filename, customers);
+    return true;
+}
+
 //• The ability to display all items, sorted by titles or IDs.
 //• The ability to display all customer, sorted by names or IDs.
 //• The ability to display a group of customers according to their level (e.g. Guest, Regular, or VIP).
