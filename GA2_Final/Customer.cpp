@@ -127,7 +127,10 @@ void Customer::display() {
 		endl << "- Account Type: " << getType() <<
 		endl << "- Return Count: " << getReturnCount() <<
 		endl << "- Number of Items Borrowed: " << getNumBorrowed() <<
-		endl << "- Borrowed Items: " << getBorrowedItems() << endl;
+		endl << "- Borrowed Items: " << endl;
+	for (int i = 0; i < this->getNumBorrowed(); i++) {
+		cout << this->getBorrowedItems().at(i) << endl;
+	}
 }
 
 void Customer::promotion() {

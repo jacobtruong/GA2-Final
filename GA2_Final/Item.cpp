@@ -140,7 +140,7 @@ void Item::writeToFile(string filename) {
 
 void Item::display()
 {
-	cout << "Item: '\n'";
+	cout << "Item: " << endl;
 	cout << "- ID: " << getID() <<
 		endl << "- Type: " << getTitle() <<
 		endl << "- Loan Type: " << getLoanType() <<

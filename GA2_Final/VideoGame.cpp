@@ -24,7 +24,13 @@ void VideoGame::writeToFile(string filename) {
 }
 
 void VideoGame::display() {
-	cout << *this;
+	cout << "Item: " << endl;
+	cout << "- ID: " << getID() <<
+		endl << "- Type: " << getTitle() <<
+		endl << "- Loan Type: " << getLoanType() <<
+		endl << "- Stock: " << getStock() <<
+		endl << "- Rental Fee: " << getRentalFee() <<
+		endl << "- Status: " << getStatus() << endl;
 }
 
 string VideoGame::toStr()
