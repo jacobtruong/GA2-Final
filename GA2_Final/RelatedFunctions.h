@@ -634,7 +634,8 @@ bool updateCustomer(string filename) {
     return true;
 }
 
-//• The ability to increase the number of copies of an existing item (this is done when new stock arrives).
+// "The ability to increase the number of copies of an existing item (this is done when new stock arrives)."
+// Function that adds or subtracts a certain number from current stock
 bool addStock(string filename) {
     // Fetch all current items from file
     vector<Item*> items = fetchItems(filename);
