@@ -218,8 +218,8 @@ bool updateItem(string filename) {
     int updating_item_index;
     string string_input;
 
-    cout << "Please enter the ID of the item you want to update: ";
-    getline(cin, string_input);
+    cout << "Input the item you want to update!\n";
+    string_input = inputItemID();
 
     if (search(string_input, items) != -1) {
         updating_item_index = search(string_input, items);
@@ -231,7 +231,7 @@ bool updateItem(string filename) {
 
     items.at(updating_item_index)->display();
 
-    cout << "\nPlease re-input all information to update the selected item:\n";
+    cout << "Please re-input all information to update the selected item:\n";
     // Item attributes
     string id, title, genre, rental_type;
     int type, stock;
@@ -271,10 +271,11 @@ bool updateItem(string filename) {
 bool deleteItem(string filename) {
     vector<Item*> items = fetchItems(filename);
     int updating_item_index;
-    string string_input;
+    string string_input, item_id;
 
-    cout << "Please enter the ID of the item you want to delete: ";
-    getline(cin, string_input);
+    cout << "Input the item you want to delete!\n";
+    string_input = inputItemID();
+    item_id = string_input;
 
     if (search(string_input, items) != -1) {
         updating_item_index = search(string_input, items);
@@ -283,11 +284,17 @@ bool deleteItem(string filename) {
         cout << "Item not found in database. Please try again\n";
         return false;
     }
-
     items.at(updating_item_index)->display();
 
+    do {
+        cout << "ARE YOU SURE YOU WANT TO DELETE THIS ITEM? (Y/N): ";
+        getline(cin, string_input);
+    } while (string_input != "Y" && string_input != "y" && string_input != "N" && string_input != "n");
 
-    items.at(updating_item_index) = NULL;
+    if (string_input == "N" || string_input == "n") {
+        cout << "\nDeletion has been cancelled!\n";
+        return false;
+    }
 
     ofstream file;
     file.open(filename, ios::trunc);
@@ -299,7 +306,7 @@ bool deleteItem(string filename) {
         i->writeToFile(filename);
     }
 
-    cout << "Item " << string_input << " has been deleted\n";
+    cout << "Item " << item_id << " has been deleted\n";
 
     return true;
 }
