@@ -124,9 +124,9 @@ string inputItemRentalType() {
 string inputItemGenre() {
     string string_input;
     do {
-        cout << "Please input genre: ";
+        cout << "Please input genre (Action, Horror, Drama, or Comedy): ";
         getline(cin, string_input);
-    } while (string_input == "");
+    } while (string_input != "Action" && string_input != "Horror" && string_input != "Drama" && string_input != "Comedy");
     return string_input;
 }
 
