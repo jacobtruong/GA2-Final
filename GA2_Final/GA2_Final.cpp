@@ -139,7 +139,9 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-
+	cout << "ASSIGNMENT 2 GROUP 23" << endl
+		<< "s3878145, s3878145@rmit.edu.vn, Tri, Truong" << endl
+		<< "s3878496, s3878496@rmit.edu.vn, Dat, Pham" << endl;
 
 	return 0;
 }
