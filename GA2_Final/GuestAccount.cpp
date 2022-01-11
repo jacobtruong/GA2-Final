@@ -90,10 +90,6 @@ void GuestAccount::writeToFile(string filename) {
 	file.close();
 }
 
-void GuestAccount::display() {
-	cout << *this;
-}
-
 ostream& operator<<(ostream& out, const GuestAccount& csm)
 {
 	GuestAccount a = csm;

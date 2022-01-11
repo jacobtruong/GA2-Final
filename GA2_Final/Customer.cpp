@@ -119,6 +119,15 @@ void Customer::writeToFile(string filename) {
 }
 
 void Customer::display() {
+	cout << "Customer: " << endl;
+	cout << "- ID: " << getID() <<
+		endl << "- Name: " << getName() <<
+		endl << "- Address: " << getAddress() <<
+		endl << "- Phone Number: " << getPhone() <<
+		endl << "- Account Type: " << getType() <<
+		endl << "- Return Count: " << getReturnCount() <<
+		endl << "- Number of Items Borrowed: " << getNumBorrowed() <<
+		endl << "- Borrowed Items: " << getBorrowedItems() << endl;
 }
 
 void Customer::promotion() {

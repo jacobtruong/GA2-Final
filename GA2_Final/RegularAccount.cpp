@@ -78,10 +78,6 @@ void RegularAccount::writeToFile(string filename) {
 	file.close();
 }
 
-void RegularAccount::display() {
-	cout << *this;
-}
-
 ostream& operator<<(ostream& out, const RegularAccount& csm)
 {
 	RegularAccount a = csm;

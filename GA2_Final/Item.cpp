@@ -1,5 +1,15 @@
 #include "Item.h"
 
+ostream& operator<< (ostream& out, Item& e) {
+	out << "- ID: " << e.getID() <<
+		endl << "- Type: " << e.getTitle() <<
+		endl << "- Loan Type: " << e.getLoanType() <<
+		endl << "- Stock: " << e.getStock() <<
+		endl << "- Rental Fee: " << e.getRentalFee() <<
+		endl << "- Status: " << e.getStatus() << endl;
+	return out;
+}
+
 Item::Item() {
 	this->id = "";
 	this->title = "";
@@ -130,6 +140,13 @@ void Item::writeToFile(string filename) {
 
 void Item::display()
 {
+	cout << "Item: '\n'";
+	cout << "- ID: " << getID() <<
+		endl << "- Type: " << getTitle() <<
+		endl << "- Loan Type: " << getLoanType() <<
+		endl << "- Stock: " << getStock() <<
+		endl << "- Rental Fee: " << getRentalFee() <<
+		endl << "- Status: " << getStatus() << endl;
 }
 
 string Item::toStr() {

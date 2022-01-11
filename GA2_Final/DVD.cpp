@@ -35,7 +35,14 @@ void DVD::writeToFile(string filename) {
 }
 
 void DVD::display() {
-	cout << *this;
+	cout << "Item: " << endl;
+	cout << "- ID: " << getID() <<
+		endl << "- Type: " << getTitle() <<
+		endl << "- Loan Type: " << getLoanType() <<
+		endl << "- Genre: " << this->getGenre() <<
+		endl << "- Stock: " << getStock() <<
+		endl << "- Rental Fee: " << getRentalFee() <<
+		endl << "- Status: " << getStatus() << endl;
 }
 
 string DVD::toStr()
