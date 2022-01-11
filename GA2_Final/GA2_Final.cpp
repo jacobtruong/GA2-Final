@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 					break;
 				case 3:
 					// Promoting an existing customer
-					promoteCustomer("Customer.txt");
+					promoteCustomer("Customers.txt");
 					break;
 				case 4:
 					//Rent an item
@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 					break;
 				case 7:
 					//Display out-of-stock items
-					displayItemsWithNoStocks("Items.text");
+					displayItemsWithNoStocks("Items.txt");
 					break;
 				case 8:
 					//Display all customers

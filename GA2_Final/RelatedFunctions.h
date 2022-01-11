@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-
 #include <sstream>
 #include <vector>
 #include <string>
@@ -17,20 +16,30 @@
 #include "VIPAccount.h"
 #include "Header.h"
 
+// This function fetches items from an item file and return a vector of Item objects
 vector<Item*> fetchItems(string filename) {
+
+    // Open file
     ifstream ifile;
     ifile.open(filename);
 
+    // Initialise Item * vector
     vector<Item*> item_list;
 
     string line, word;
 
+    // Loop until the end of file
     while (getline(ifile, line)) {
+        // Take in whole line
         stringstream ss(line);
         vector<string> words;
+
+        // Breaking the line into smaller words
         while (getline(ss, word, ',')) {
             words.push_back(word);
         }
+
+        // Depends on the item's rental type (words.at(2)), appropriate objects will be created and add to item_list
         if (words.at(2) == "Video Game") {
             VideoGame* vg = new VideoGame(words.at(0), words.at(1), stoi(words.at(3)), stoi(words.at(4)), stof(words.at(5)));
             item_list.push_back(vg);
@@ -48,6 +57,7 @@ vector<Item*> fetchItems(string filename) {
     return item_list;
 }
 
+// This basically "update" the file by rewriting data to the file
 bool updateFile(string filename, vector<Customer*> &customers) {
     ofstream file;
     file.open(filename, ios::trunc);
@@ -906,7 +916,7 @@ bool displayItemsWithNoStocks(string filename) {
     cout << "Below are items with no stocks:\n";
 
     for (Item* item : items) {
-        if (!item->getStatus()) {
+        if (item->getStock() == 0) {
             item->display();
         }
     }

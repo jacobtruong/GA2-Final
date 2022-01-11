@@ -1,1 +1,1 @@
-I001-2022,Witcher,Video Game,2,1,17.55,1
+I001-2022,Witcher,Video Game,2,0,17.55,0
