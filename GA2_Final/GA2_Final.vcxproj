@@ -154,7 +154,7 @@
     <ClInclude Include="DVD.h" />
     <ClInclude Include="GuestAccount.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="ItemRelatedFunctions.h" />
+    <ClInclude Include="RelatedFunctions.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="OldMovieRecord.h" />
     <ClInclude Include="RegularAccount.h" />

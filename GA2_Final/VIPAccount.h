@@ -10,7 +10,7 @@ public:
 	VIPAccount();
 	VIPAccount(string id, string name, string address, string phone);
 	VIPAccount(string id, string name, string address, string phone, int return_count, int point);
-	VIPAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, int point, vector<Item> borrowed_items);
+	VIPAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, int point, vector<Item *> borrowed_items);
 	~VIPAccount();
 
 	void setPoint(int point);
@@ -19,6 +19,9 @@ public:
 
 	bool borrowing(Item* item);
 	bool returning(Item* item);
+
+	void writeToFile(string filename);
+	void display();
 
 	friend ostream& operator<< (ostream& out, const VIPAccount& csm);
 };

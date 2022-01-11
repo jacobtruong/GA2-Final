@@ -15,6 +15,7 @@ public:
 
 	void writeToFile(string filename);
 	void display();
+	string toStr();
 
 	friend ostream& operator<< (ostream& out, const OldMovieRecord& item);
 };

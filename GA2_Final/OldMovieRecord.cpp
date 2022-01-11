@@ -37,6 +37,13 @@ void OldMovieRecord::display() {
 	cout << *this;
 }
 
+string OldMovieRecord::toStr()
+{
+	stringstream ss;
+	ss << this->getID() << "," << this->getTitle() << "," << this->getRentalType() << "," << this->getGenre() << "," << this->getLoanType() << "," << this->getStock() << "," << this->getRentalFee() << "," << this->getStatus();
+	return ss.str();
+}
+
 ostream& operator<< (ostream& out, const OldMovieRecord& item) {
 	OldMovieRecord i = item;
 	out << i.getID() << "," << i.getTitle() << "," << i.getRentalType() << "," << i.getGenre() << "," << i.getLoanType() << "," << i.getStock() << "," << i.getRentalFee() << "," << i.getStatus() << endl;

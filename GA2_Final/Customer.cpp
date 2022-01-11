@@ -57,7 +57,7 @@ void Customer::setReturnCount(int return_count)
 	this->return_count = return_count;
 }
 
-void Customer::setBorrowedItems(vector<Item>& item)
+void Customer::setBorrowedItems(vector<Item *>& item)
 {
 	this->borrowed_items = item;
 }
@@ -111,12 +111,14 @@ int Customer::getNumBorrowed()
 	return this->num_borrowed;
 }
 
-vector<Item>& Customer::getBorrowedItems() {
+vector<Item *>& Customer::getBorrowedItems() {
 	return this->borrowed_items;
 }
 
-ostream& operator<< (ostream& out, const Customer& csm) {
-	return out;
+void Customer::writeToFile(string filename) {
+}
+
+void Customer::display() {
 }
 
 void Customer::promotion() {

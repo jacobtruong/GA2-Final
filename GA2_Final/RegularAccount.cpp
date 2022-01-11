@@ -21,7 +21,7 @@ RegularAccount::RegularAccount(string id, string name, string address, string ph
 	this->setNumBorrowed(0);
 }
 
-RegularAccount::RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item> borrowed_items) {
+RegularAccount::RegularAccount(string id, string name, string address, string phone, int num_borrowed, int return_count, vector<Item *> borrowed_items) {
 	setAll(id, name, address, phone, "Regular");
 	setNumBorrowed(num_borrowed);
 	setReturnCount(return_count);
@@ -41,7 +41,7 @@ bool RegularAccount::borrowing(Item* item)
 			return false;
 		}
 		cout << "Regular Member " << this->getName() << " (" << this->getID() << ")" << " has successfully borrowed item " << item->getTitle() << " (" << item->getID() << ")" << endl;
-		this->getBorrowedItems().push_back(*item);
+		this->getBorrowedItems().push_back(item);
 		setNumBorrowed(getNumBorrowed() + 1);
 		return true;
 	}
@@ -55,7 +55,7 @@ bool RegularAccount::returning(Item* item)
 {
 	// Check if the member has borrowed this item, return the item
 	for (int i = 0; i < this->getBorrowedItems().size(); i++) {
-		if (item->getID() == getBorrowedItems().at(i).getID()) {
+		if (item->getID() == this->getBorrowedItems().at(i)->getID()) {
 			if (!(item->returning())) {
 				cout << "Unexpected error with returning process!\n";
 				return false;
@@ -71,8 +71,32 @@ bool RegularAccount::returning(Item* item)
 	return false;
 }
 
+void RegularAccount::writeToFile(string filename) {
+	ofstream file;
+	file.open(filename, ios::app);
+	file << *this;
+	file.close();
+}
+
+void RegularAccount::display() {
+	cout << *this;
+}
+
 ostream& operator<<(ostream& out, const RegularAccount& csm)
 {
-	// TODO: insert return statement here
+	RegularAccount a = csm;
+	out << a.getID() << ";" << a.getName() << ";" << a.getAddress() << ";" << a.getPhone() << ";" << a.getType() << ";" << a.getReturnCount() << ";" << a.getNumBorrowed() << ";";
+
+	for (int i = 0; i < a.getBorrowedItems().size(); i++) {
+		out << "[" << a.getBorrowedItems().at(i)->toStr() << "]";
+		if (i == a.getBorrowedItems().size() - 1) {
+			continue;
+		}
+		else {
+			out << ";";
+		}
+	}
+
+	out << endl;
 	return out;
 }

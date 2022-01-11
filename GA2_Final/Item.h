@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -41,5 +42,6 @@ public:
 
 	virtual void writeToFile(string filename);
 	virtual void display();
+	virtual string toStr();
 };
 

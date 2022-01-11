@@ -275,7 +275,230 @@ bool deleteItem(string filename) {
     return true;
 }
 
+string inputCustomerID() {
+    string string_input;
+    do {
+        cout << "Please input valid customer ID (Format: Cxxx): ";
+        getline(cin, string_input);
+    } while (!check_id_customer(string_input));
+    return string_input;
+}
+
+string inputCustomerName() {
+    string string_input;
+    do {
+        cout << "Please input customer's name: ";
+        getline(cin, string_input);
+    } while (string_input == "");
+    return string_input;
+}
+
+string inputCustomerAddress() {
+    string string_input;
+    do {
+        cout << "Please input customer's address: ";
+        getline(cin, string_input);
+    } while (string_input == "");
+    return string_input;
+}
+
+string inputCustomerPhone() {
+    string string_input;
+    do {
+        cout << "Please input customer's phone number: ";
+        getline(cin, string_input);
+    } while (string_input == "");
+    return string_input;
+}
+
+string inputCustomerType() {
+    string string_input;
+    do {
+        cout << "Please input customer's account type (Guest, Regular, or VIP): ";
+        getline(cin, string_input);
+    } while (string_input != "Guest" && string_input != "Regular" && string_input != "VIP");
+    return string_input;
+}
+
+int inputCustomerPoint() {
+    string string_input;
+    do {
+        cout << "Please input customer's total number reward points: ";
+        getline(cin, string_input);
+    } while (!check_user_input_int(string_input));
+    return stoi(string_input);
+}
+
+//void inputCustomerBorrow() {
+//    string string_input;
+//    do {
+//        cout << "How many items are the customer borrowing: ";
+//        getline(cin, string_input);
+//    } while (stoi(string_input) < 0);
+//
+//    int num = stoi(string_input);
+//    int count = 0;
+//
+//    if (num == 0) {
+//        return;
+//    }
+//    else {
+//        while (count != num) {
+//            do {
+//                cout << "Which items are the customer borrowing: ";
+//                getline(cin, string_input);
+//            } while (stoi(string_input) < 0);
+//        }
+//    }
+//}
+
+Item* processItemFromCustomer(string str) {
+    Item* item;
+
+    stringstream ss(str.substr(1, str.size() - 2));
+    
+    string word;
+
+    vector<string> words;
+
+    while (getline(ss, word, ',')) {
+        words.push_back(word);
+    }
+
+    if (words.at(2) == "Video Game") {
+        item = new VideoGame(words.at(0), words.at(1), stoi(words.at(3)), stoi(words.at(4)), stof(words.at(5)));
+    }
+    else if (words.at(2) == "DVD") {
+        item = new DVD(words.at(0), words.at(1), words.at(3), stoi(words.at(4)), stoi(words.at(5)), stof(words.at(6)));
+    }
+    else {
+        item = new OldMovieRecord(words.at(0), words.at(1), words.at(3), stoi(words.at(4)), stoi(words.at(5)), stof(words.at(6)));
+    }
+
+    return item;
+}
+
+vector<Customer *> fetchCustomers(string filename) {
+    ifstream ifile;
+    ifile.open(filename);
+
+    vector<Customer *> customer_list;
+
+    string line, word;
+
+    int num_items = 0;
+
+    while (getline(ifile, line)) {
+        stringstream ss(line);
+        vector<string> words;
+        vector<Item *> items;
+        while (getline(ss, word, ';')) {
+            words.push_back(word);
+        }
+
+        int num_word = words.size();
+
+        if (words.at(4) == "Guest") {
+            GuestAccount* ga = new GuestAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(5)));
+            if (num_word == 7) {
+                continue;
+            }
+            else if (num_word > 7) {
+                for (int i = 7; i < num_word; i++) {
+                    items.push_back(processItemFromCustomer(words.at(i)));
+                }
+                ga->setBorrowedItems(items);
+            }
+
+            customer_list.push_back(ga);
+        }
+        else if (words.at(4) == "Regular") {
+            RegularAccount* ra = new RegularAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(5)));
+            if (num_word == 7) {
+                continue;
+            }
+            else if (num_word > 7) {
+                for (int i = 7; i < num_word; i++) {
+                    items.push_back(processItemFromCustomer(words.at(i)));
+                }
+                ra->setBorrowedItems(items);
+            }
+            customer_list.push_back(ra);
+        }
+        else if (words.at(4) == "VIP") {
+            VIPAccount* va = new VIPAccount(words.at(0), words.at(1), words.at(2), words.at(3), stoi(words.at(5)), stoi(words.at(7)));
+            if (num_word == 8) {
+                continue;
+            }
+            else if (num_word > 8) {
+                for (int i = 8; i < num_word; i++) {
+                    items.push_back(processItemFromCustomer(words.at(i)));
+                }
+                va->setBorrowedItems(items);
+            }
+            customer_list.push_back(va);
+        }
+    }
+    return customer_list;
+}
+
 //• The ability to add, update customer from the database.
+// Add
+bool addCustomer(string filename) {
+    // For input validation
+    int choice;
+    string string_input;
+
+    // Account attributes
+    string id, name, address, phone, type;
+    int point = 0;
+    vector<Item *> list;
+
+    cout << "Please select which type of Account you would like to add:" << endl;
+    cout << "1. Guest Account" << endl;
+    cout << "2. Regular Account" << endl;
+    cout << "3. VIP Account" << endl;
+
+    do {
+        cout << "Your choice: ";
+        getline(cin, string_input);
+    } while (stoi(string_input) < 1 || stoi(string_input) > 3);
+    choice = stoi(string_input);
+
+    id = inputCustomerID();
+    name = inputCustomerName();
+    address = inputCustomerAddress();
+    phone = inputCustomerPhone();
+    if (choice == 3) {
+        point = inputCustomerPoint();
+    }
+
+    // Open file
+    ofstream file;
+    file.open(filename, ios::app);
+
+    if (choice == 1) {
+        GuestAccount* ga = new GuestAccount(id, name, address, phone);
+        file << * ga;
+    }
+    else if (choice == 2) {
+        RegularAccount* ra = new RegularAccount(id, name, address, phone);
+        file << * ra;
+    }
+    else {
+        VIPAccount* va = new VIPAccount(id, name, address, phone, 0, point);
+        file << * va;
+    }
+
+    return true;
+}
+
+// Update
+// Special note: As not to interfere with the system, only ID, Name, Address, Phone, and Type could be changed
+bool updateCustomer(string filename) {
+
+}
+
 //• The ability to increase the number of copies of an existing item (this is done when new stock arrives).
 //• The ability to read data from and save the data to disk (e.g. text files). This applied for any updates to the customer list and the item list, as described above.
 //• The ability to rent an item (hence decreasing the number of copies held in stock). It should not be possible to rent an item for which there are no copies held in stock. In this case, the item’s rental status should be ‘not available’ or ‘borrowed’.

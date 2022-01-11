@@ -132,3 +132,7 @@ void Item::display()
 {
 }
 
+string Item::toStr() {
+	return "A";
+}
+
