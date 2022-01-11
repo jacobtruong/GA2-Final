@@ -102,11 +102,11 @@ int main(int argc, char* argv[]) {
 					break;
 				case 8:
 					//Display all customers
-					displayAllCustomers("Customers.txt");
+					displayAllCustomers("Items.txt");
 					break;
 				case 9:
 					//Display a group of customers
-					displayCustomersByType("Customers.txt");
+					displayCustomersByType("Customer.txt");
 					break;
 				case 10:
 					//Search items
