@@ -160,6 +160,9 @@ float inputItemRentalFee() {
 //• The ability to add, update and delete items from the database of stocked items.
     // Add
 bool addItem(string filename) {
+    // Fetch all current items
+    vector<Item*> items = fetchItems(filename);
+
     // For input validation
     int choice;
     string string_input;
@@ -183,6 +186,12 @@ bool addItem(string filename) {
     cout << endl;
     
     id = inputItemID();
+
+    if (search(id, items) != -1) {
+        cout << "Item with the same ID (" << id << ") already existed! Please try again!\n";
+        return false;
+    }
+
     title = inputItemTitle();
 
     if (choice != 1) {
@@ -209,12 +218,15 @@ bool addItem(string filename) {
         file << *omr;
     }
 
+    file.close();
     return true;
 }
 
 // Update
 bool updateItem(string filename) {
+    // Fetch all current items
     vector<Item*> items = fetchItems(filename);
+
     int updating_item_index;
     string string_input;
 
@@ -269,7 +281,9 @@ bool updateItem(string filename) {
 
 // Delete
 bool deleteItem(string filename) {
+    // Fetch all current items
     vector<Item*> items = fetchItems(filename);
+
     int updating_item_index;
     string string_input, item_id;
 
@@ -388,31 +402,31 @@ int inputCustomerPoint() {
 //    }
 //}
 
-Item* processItemFromCustomer(string str) {
-    Item* item;
-
-    stringstream ss(str.substr(1, str.size() - 2));
-    
-    string word;
-
-    vector<string> words;
-
-    while (getline(ss, word, ',')) {
-        words.push_back(word);
-    }
-
-    if (words.at(2) == "Video Game") {
-        item = new VideoGame(words.at(0), words.at(1), stoi(words.at(3)), stoi(words.at(4)), stof(words.at(5)));
-    }
-    else if (words.at(2) == "DVD") {
-        item = new DVD(words.at(0), words.at(1), words.at(3), stoi(words.at(4)), stoi(words.at(5)), stof(words.at(6)));
-    }
-    else {
-        item = new OldMovieRecord(words.at(0), words.at(1), words.at(3), stoi(words.at(4)), stoi(words.at(5)), stof(words.at(6)));
-    }
-
-    return item;
-}
+//Item* processItemFromCustomer(string str) {
+//    Item* item;
+//
+//    stringstream ss(str.substr(1, str.size() - 2));
+//    
+//    string word;
+//
+//    vector<string> words;
+//
+//    while (getline(ss, word, ',')) {
+//        words.push_back(word);
+//    }
+//
+//    if (words.at(2) == "Video Game") {
+//        item = new VideoGame(words.at(0), words.at(1), stoi(words.at(3)), stoi(words.at(4)), stof(words.at(5)));
+//    }
+//    else if (words.at(2) == "DVD") {
+//        item = new DVD(words.at(0), words.at(1), words.at(3), stoi(words.at(4)), stoi(words.at(5)), stof(words.at(6)));
+//    }
+//    else {
+//        item = new OldMovieRecord(words.at(0), words.at(1), words.at(3), stoi(words.at(4)), stoi(words.at(5)), stof(words.at(6)));
+//    }
+//
+//    return item;
+//}
 
 vector<Customer *> fetchCustomers(string filename) {
     ifstream ifile;
@@ -485,6 +499,9 @@ vector<Customer *> fetchCustomers(string filename) {
 //• The ability to add, update customer from the database.
 // Add
 bool addCustomer(string filename) {
+    // Fetch all current customers
+    vector<Customer*> customers = fetchCustomers(filename);
+    
     // For input validation
     int choice;
     string string_input;
@@ -506,6 +523,12 @@ bool addCustomer(string filename) {
     choice = stoi(string_input);
 
     id = inputCustomerID();
+
+    if (search(id, customers) != -1) {
+        cout << "Customer with the same ID (" << id << ") already existed! Please try again!\n";
+        return false;
+    }
+
     name = inputCustomerName();
     address = inputCustomerAddress();
     phone = inputCustomerPhone();
@@ -529,6 +552,9 @@ bool addCustomer(string filename) {
         VIPAccount* va = new VIPAccount(id, name, address, phone, 0, point);
         file << * va;
     }
+
+    // Close file
+    file.close();
 
     return true;
 }
@@ -738,19 +764,6 @@ bool promoteCustomer(string filename) {
     return true;
 }
 
-const char * stringToChar(string str) {
-    int size = str.length();
-    char * p = new char[size];
-
-    int i;
-    for (i = 0; i < sizeof(p); i++) {
-        p[i] = str[i];
-        cout << p[i];
-    }
-
-    return p;
-}
-
 
 // SORTS
 void sortByName(vector<Item* >* items) {
@@ -797,10 +810,11 @@ bool displayAllItems(string filename) {
     cout << "Would you like to sort the items by: \n";
     cout << "1. Name/Title\n";
     cout << "2. ID\n";
+
     do {
         cout << "Your choice: ";
         getline(cin, input);
-    } while (stoi(input) != 1 && stoi(input) != 2);
+    } while (!check_user_input_int(input) || stoi(input) != 1 && stoi(input) != 2);
     int choice = stoi(input);
 
     if (choice == 1) {
@@ -810,7 +824,7 @@ bool displayAllItems(string filename) {
         sortByID(&items);
     }
 
-    for (Item * item : items) {
+    for (Item* item : items) {
         item->display();
     }
 
@@ -828,7 +842,7 @@ bool displayAllCustomers(string filename) {
     do {
         cout << "Your choice: ";
         getline(cin, input);
-    } while (stoi(input) != 1 && stoi(input) != 2);
+    } while (!check_user_input_int(input) || stoi(input) != 1 && stoi(input) != 2);
     int choice = stoi(input);
 
     if (choice == 1) {
@@ -846,9 +860,146 @@ bool displayAllCustomers(string filename) {
 }
  
 //• The ability to display a group of customers according to their level (e.g. Guest, Regular, or VIP).
+bool displayCustomersByType(string filename) {
+    vector<Customer*> customers = fetchCustomers(filename);
+    string input;
+
+    cout << "Select your type customers level: \n";
+    cout << "1. Guest Customers\n";
+    cout << "2. Regular Customers\n";
+    cout << "3. VIP Customers\n";
+
+    do {
+        cout << "Your choice: ";
+        getline(cin, input);
+    } while (!check_user_input_int(input) || stoi(input) != 1 && stoi(input) != 2 && stoi(input) != 3);
+
+    int choice = stoi(input);
+
+    string check;
+    if (choice == 1) {
+        check = "Guest";
+    }
+    else if (choice == 2) {
+        check = "Regular";
+    }
+    else {
+        check = "VIP";
+    }
+
+    cout << endl;
+
+    for (Customer* csm : customers) {
+        if (csm->getType() == check) {
+            csm->display();
+        }
+    }
+
+    return true;
+}
+
 //• The ability to display all items that have no copies in stock.
+bool displayItemsWithNoStocks(string filename) {
+    // Fetch all current items
+    vector<Item*> items = fetchItems(filename);
+
+    cout << "Below are items with no stocks:\n";
+
+    for (Item* item : items) {
+        if (!item->getStatus()) {
+            item->display();
+        }
+    }
+
+    return true;
+}
+
 //• The ability to search for an item that matches a specified title or ID.
 //   o Searches that match titles should display the information about that item, including title, genre, rental type, and the number of copies available.
+bool searchAndDisplayItems(string filename) {
+    // Fetch all current items
+    vector<Item*> items = fetchItems(filename);
+    string input;
+    bool has_required_item = false;
+
+    cout << "Would you like to search for Items by: \n";
+    cout << "1. Name/Title\n";
+    cout << "2. ID\n";
+
+    do {
+        cout << "Your choice: ";
+        getline(cin, input);
+    } while (!check_user_input_int(input) || stoi(input) != 1 && stoi(input) != 2);
+    int choice = stoi(input);
+
+    cout << "Please input your search query: ";
+    getline(cin, input);
+
+    if (choice == 1) {
+        for (Item * item : items) {
+            if (item->getTitle() == input) {
+                has_required_item = true;
+                item->display();
+            }
+        }
+    }
+    else if (choice == 2) {
+        for (Item* item : items) {
+            if (item->getID() == input) {
+                has_required_item = true;
+                item->display();
+            }
+        }
+    }
+
+    if (!has_required_item) {
+        cout << "\nNo items found with the inputted query!\n";
+    }
+
+    return has_required_item;
+}
+
 //• The ability to search for a customer that matches a specified name or ID.
 //    o Searches that match a customer should display the information about that customer including customer name and customer ID, phone, address
+bool searchAndDisplayCustomers(string filename) {
+    // Fetch all current items
+    vector<Customer *> customers = fetchCustomers(filename);
+    string input;
+    bool has_required_item = false;
 
+    cout << "Would you like to search for Customers by: \n";
+    cout << "1. Name\n";
+    cout << "2. ID\n";
+
+    do {
+        cout << "Your choice: ";
+        getline(cin, input);
+    } while (!check_user_input_int(input) || stoi(input) != 1 && stoi(input) != 2);
+    int choice = stoi(input);
+
+    cout << "Please input your search query: ";
+    getline(cin, input);
+
+    if (choice == 1) {
+        for (Customer * customer : customers) {
+            if (customer->getName() == input) {
+                has_required_item = true;
+                customer->display();
+            }
+        }
+    }
+    else if (choice == 2) {
+        for (Customer * customer : customers) {
+            if (customer->getID() == input) {
+                has_required_item = true;
+                customer->display();
+            }
+        }
+    }
+
+    if (!has_required_item) {
+        cout << "\nNo items found with the inputted query!\n";
+    }
+
+    return has_required_item;
+}

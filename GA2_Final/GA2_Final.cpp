@@ -14,7 +14,13 @@ int main(int argc, char* argv[]) {
     //promoteCustomer("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
 
     //displayAllItems("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
-    displayAllCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
+    //displayAllCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
+
+    //displayCustomersByType("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
+    //displayItemsWithNoStocks("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
+
+    searchAndDisplayItems("E:\\Users\\Raven\\Documents\\Test\\Items.txt");
+    searchAndDisplayCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
 
     /*vector<Customer*> vec = fetchCustomers("E:\\Users\\Raven\\Documents\\Test\\Customers.txt");
     for (Customer* i : vec) {
