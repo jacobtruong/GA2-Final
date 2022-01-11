@@ -42,10 +42,10 @@ void VideoGame::display() {
 		endl << "- Rental Fee: " << getRentalFee() << " USD" <<
 		endl << "- Status: ";
 	if (getStatus()) {
-		cout << "True" << endl;
+		cout << "Available" << endl;
 	}
 	else {
-		cout << "False" << endl;
+		cout << "Unavaible" << endl;
 	}
 	cout << "\n";
 }

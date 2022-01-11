@@ -162,10 +162,10 @@ void Item::display()
 		endl << "- Rental Fee: " << getRentalFee() << " USD" <<
 		endl << "- Status: ";
 	if (getStatus()) {
-		cout << "True" << endl;
+		cout << "Available" << endl;
 	}
 	else {
-		cout << "False" << endl;
+		cout << "Unavailable" << endl;
 	}
 	cout << "\n";
 }

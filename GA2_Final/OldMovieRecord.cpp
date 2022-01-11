@@ -54,10 +54,10 @@ void OldMovieRecord::display() {
 		endl << "- Rental Fee: " << getRentalFee() << " USD" <<
 		endl << "- Status: ";
 	if (getStatus()) {
-		cout << "True" << endl;
+		cout << "Avaible" << endl;
 	}
 	else {
-		cout << "False" << endl;
+		cout << "Unavaible" << endl;
 	}
 	cout << "\n";
 }
