@@ -2,9 +2,10 @@
 
 #include <iostream>
 #include <fstream>
-#include <ostream>
+
 #include <sstream>
 #include <vector>
+#include <string>
 
 #include "Item.h"
 #include "OldMovieRecord.h"
@@ -737,8 +738,113 @@ bool promoteCustomer(string filename) {
     return true;
 }
 
+const char * stringToChar(string str) {
+    int size = str.length();
+    char * p = new char[size];
+
+    int i;
+    for (i = 0; i < sizeof(p); i++) {
+        p[i] = str[i];
+        cout << p[i];
+    }
+
+    return p;
+}
+
+
+// SORTS
+void sortByName(vector<Item* >* items) {
+    int size = items->size();
+
+    for (int i = 0; i < size - 1; i++)
+        for (int j = 0; j < size - i - 1; j++)
+            if (items->at(j)->getTitle().compare(items->at(j + 1)->getTitle()) > 0)
+                swap(items->at(j), items->at(j + 1));
+}
+
+void sortByID(vector<Item* >* items) {
+    int size = items->size();
+
+    for (int i = 0; i < size - 1; i++)
+        for (int j = 0; j < size - i - 1; j++)
+            if (items->at(j)->getID().compare(items->at(j + 1)->getID()) > 0)
+                swap(items->at(j), items->at(j + 1));
+}
+
+void sortByName(vector<Customer * >* customers) {
+    int size = customers->size();
+
+    for (int i = 0; i < size - 1; i++)
+        for (int j = 0; j < size - i - 1; j++)
+            if (customers->at(j)->getName().compare(customers->at(j + 1)->getName()) > 0)
+                swap(customers->at(j), customers->at(j + 1));
+}
+
+void sortByID(vector<Customer * >* customers) {
+    int size = customers->size();
+
+    for (int i = 0; i < size - 1; i++)
+        for (int j = 0; j < size - i - 1; j++)
+            if (customers->at(j)->getID().compare(customers->at(j + 1)->getID()) > 0)
+                swap(customers->at(j), customers->at(j + 1));
+}
+
 //• The ability to display all items, sorted by titles or IDs.
+bool displayAllItems(string filename) {
+    vector<Item*> items = fetchItems(filename);
+    string input;
+
+    cout << "Would you like to sort the items by: \n";
+    cout << "1. Name/Title\n";
+    cout << "2. ID\n";
+    do {
+        cout << "Your choice: ";
+        getline(cin, input);
+    } while (stoi(input) != 1 && stoi(input) != 2);
+    int choice = stoi(input);
+
+    if (choice == 1) {
+        sortByName(&items);
+    }
+    else if (choice == 2) {
+        sortByID(&items);
+    }
+
+    for (Item * item : items) {
+        item->display();
+    }
+
+    return true;
+}
+
 //• The ability to display all customer, sorted by names or IDs.
+bool displayAllCustomers(string filename) {
+    vector<Customer *> customers = fetchCustomers(filename);
+    string input;
+
+    cout << "Would you like to sort the customers by: \n";
+    cout << "1. Name\n";
+    cout << "2. ID\n";
+    do {
+        cout << "Your choice: ";
+        getline(cin, input);
+    } while (stoi(input) != 1 && stoi(input) != 2);
+    int choice = stoi(input);
+
+    if (choice == 1) {
+        sortByName(&customers);
+    }
+    else if (choice == 2) {
+        sortByID(&customers);
+    }
+
+    for (Customer * customer : customers) {
+        customer->display();
+    }
+
+    return true;
+}
+ 
 //• The ability to display a group of customers according to their level (e.g. Guest, Regular, or VIP).
 //• The ability to display all items that have no copies in stock.
 //• The ability to search for an item that matches a specified title or ID.
